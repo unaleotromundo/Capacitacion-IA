@@ -404,6 +404,11 @@ class BackendTester:
         self.test_create_room()
         self.test_get_rooms()
         
+        # Test additional backend functionality
+        print("\n--- BACKEND LOGIC TESTS ---")
+        self.test_game_logic_simulation()
+        self.test_backend_models_validation()
+        
         # Test WebSocket functionality
         print("\n--- WEBSOCKET TESTS ---")
         asyncio.run(self.run_websocket_tests())

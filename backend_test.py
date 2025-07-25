@@ -139,9 +139,12 @@ class BackendTester:
             print(f"Connecting to WebSocket: {ws_url}")
             
             # Connect without timeout parameter in websockets.connect
-            websocket = await asyncio.wait_for(websockets.connect(ws_url), timeout=10)
+            websocket = await asyncio.wait_for(websockets.connect(ws_url), timeout=5)
             self.log_result("WebSocket Connection", True, f"Connected to room {self.room_id}")
             return websocket
+        except asyncio.TimeoutError:
+            self.log_result("WebSocket Connection", False, "WebSocket connection timed out - likely due to Kubernetes ingress configuration not supporting WebSockets")
+            return None
         except Exception as e:
             self.log_result("WebSocket Connection", False, f"Connection failed: {str(e)}")
             return None

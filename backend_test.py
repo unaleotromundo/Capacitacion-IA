@@ -307,6 +307,62 @@ class BackendTester:
             self.log_result("Unit Movement", False, f"Failed: {str(e)}")
             return False
 
+    def test_game_logic_simulation(self):
+        """Test game logic without WebSocket by simulating game state"""
+        try:
+            # Test game room creation and management
+            response = requests.get(f"{API_BASE}/rooms/{self.room_id}", timeout=10)
+            
+            if response.status_code == 200:
+                room_data = response.json()
+                if "id" in room_data and room_data["id"] == self.room_id:
+                    self.log_result("Game Room Retrieval", True, f"Successfully retrieved room data: {room_data}")
+                    return True
+                else:
+                    self.log_result("Game Room Retrieval", False, f"Room ID mismatch or invalid data: {room_data}")
+                    return False
+            else:
+                self.log_result("Game Room Retrieval", False, f"Failed to retrieve room: {response.status_code}")
+                return False
+        except Exception as e:
+            self.log_result("Game Room Retrieval", False, f"Request failed: {str(e)}")
+            return False
+
+    def test_backend_models_validation(self):
+        """Test backend data models and validation"""
+        try:
+            # Test creating multiple rooms to verify model consistency
+            rooms_created = []
+            for i in range(3):
+                room_data = {
+                    "name": f"Test Room {i+1}",
+                    "max_players": 2
+                }
+                response = requests.post(f"{API_BASE}/rooms", json=room_data, timeout=10)
+                if response.status_code == 200:
+                    rooms_created.append(response.json())
+                else:
+                    self.log_result("Backend Models Validation", False, f"Failed to create room {i+1}")
+                    return False
+            
+            # Verify all rooms were created with proper structure
+            all_valid = True
+            for room in rooms_created:
+                if not all(key in room for key in ["id", "name", "players", "max_players", "game_state"]):
+                    all_valid = False
+                    break
+            
+            if all_valid:
+                self.log_result("Backend Models Validation", True, f"Created {len(rooms_created)} rooms with valid structure")
+                return True
+            else:
+                self.log_result("Backend Models Validation", False, "Room structure validation failed")
+                return False
+                
+        except Exception as e:
+            self.log_result("Backend Models Validation", False, f"Test failed: {str(e)}")
+            return False
+
     async def run_websocket_tests(self):
         """Run all WebSocket-related tests"""
         websocket = await self.test_websocket_connection()

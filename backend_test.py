@@ -138,9 +138,10 @@ class BackendTester:
             ws_url = f"{WS_BASE}/ws/{self.room_id}"
             print(f"Connecting to WebSocket: {ws_url}")
             
-            async with websockets.connect(ws_url, timeout=10) as websocket:
-                self.log_result("WebSocket Connection", True, f"Connected to room {self.room_id}")
-                return websocket
+            # Connect without timeout parameter in websockets.connect
+            websocket = await asyncio.wait_for(websockets.connect(ws_url), timeout=10)
+            self.log_result("WebSocket Connection", True, f"Connected to room {self.room_id}")
+            return websocket
         except Exception as e:
             self.log_result("WebSocket Connection", False, f"Connection failed: {str(e)}")
             return None

@@ -1,0 +1,189 @@
+<script type="text/javascript">
+        var gk_isXlsx = false;
+        var gk_xlsxFileLookup = {};
+        var gk_fileData = {};
+        function filledCell(cell) {
+          return cell !== '' && cell != null;
+        }
+        function loadFileData(filename) {
+        if (gk_isXlsx && gk_xlsxFileLookup[filename]) {
+            try {
+                var workbook = XLSX.read(gk_fileData[filename], { type: 'base64' });
+                var firstSheetName = workbook.SheetNames[0];
+                var worksheet = workbook.Sheets[firstSheetName];
+
+                // Convert sheet to JSON to filter blank rows
+                var jsonData = XLSX.utils.sheet_to_json(worksheet, { header: 1, blankrows: false, defval: '' });
+                // Filter out blank rows (rows where all cells are empty, null, or undefined)
+                var filteredData = jsonData.filter(row => row.some(filledCell));
+
+                // Heuristic to find the header row by ignoring rows with fewer filled cells than the next row
+                var headerRowIndex = filteredData.findIndex((row, index) =>
+                  row.filter(filledCell).length >= filteredData[index + 1]?.filter(filledCell).length
+                );
+                // Fallback
+                if (headerRowIndex === -1 || headerRowIndex > 25) {
+                  headerRowIndex = 0;
+                }
+
+                // Convert filtered JSON back to CSV
+                var csv = XLSX.utils.aoa_to_sheet(filteredData.slice(headerRowIndex)); // Create a new sheet from filtered array of arrays
+                csv = XLSX.utils.sheet_to_csv(csv, { header: 1 });
+                return csv;
+            } catch (e) {
+                console.error(e);
+                return "";
+            }
+        }
+        return gk_fileData[filename] || "";
+        }
+        </script><!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Capacitación en IA para docentes con EducaBot ">
+    <title>Capacitación IA</title>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@700&family=Roboto&display=swap" rel="stylesheet">
+    <!-- Botpress Webchat Script -->
+    <script src="https://cdn.botpress.cloud/webchat/v3.2/inject.js"></script>
+    <script src="https://files.bpcontent.cloud/2025/08/28/18/20250828181855-SDCU21ES.js" defer></script>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        body {
+            font-family: 'Roboto', sans-serif;
+            background: img src="image.jpg";
+            color: #333;
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+        }
+        header {
+            background-color: #17988C;
+            color: white;
+            text-align: center;
+            padding: 20px 0;
+        }
+        header h1 {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 3rem;
+            font-weight: 700;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+        }
+        main {
+            flex: 1;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+            align-items: center;
+            padding: 20px;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        .text-content {
+            text-align: left;
+            background: rgba(255, 255, 255, 0.9);
+            padding: 20px;
+            border-radius: 10px;
+        }
+        .poetic-description {
+            max-width: 500px;
+            margin-bottom: 20px;
+            font-size: 1.2rem;
+            line-height: 1.6;
+            color: #333;
+            font-style: italic;
+        }
+        .educabot-message {
+            max-width: 500px;
+            font-size: 1rem;
+            line-height: 1.5;
+            color: #333;
+        }
+        .educabot-message strong {
+            color: #17988C;
+            font-weight: 700;
+        }
+        #webchat {
+            width: 500px;
+            height: 500px;
+            background: rgba(255, 255, 255, 0.9);
+            border-radius: 10px;
+        }
+        #webchat .bpWebchat {
+            position: unset;
+            width: 100%;
+            height: 100%;
+            max-height: 100%;
+            max-width: 100%;
+        }
+        #webchat .bpFab {
+            display: none;
+        }
+        footer {
+            background-color: #f8f9fa;
+            text-align: center;
+            padding: 10px 0;
+            font-size: 0.9rem;
+        }
+        footer a {
+            color: #17988C;
+            text-decoration: none;
+        }
+        footer a:hover {
+            text-decoration: underline;
+        }
+        @media (max-width: 800px) {
+            main {
+                grid-template-columns: 1fr;
+                text-align: center;
+            }
+            header h1 {
+                font-size: 2rem;
+            }
+            .text-content {
+                margin: 15px 10px;
+            }
+            .poetic-description, .educabot-message {
+                max-width: 100%;
+            }
+            .poetic-description {
+                font-size: 1rem;
+            }
+            #webchat {
+                width: 100%;
+                height: 400px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header>
+        <h1>Capacitación IA</h1>
+    </header>
+
+    <!-- Main: Poetic Description, EducaBot Message, and Botpress Chat -->
+    <main>
+        <div class="text-content">
+            <div class="poetic-description">
+                La Inteligencia Artificial es un susurro del futuro, un lienzo de posibilidades que danza entre datos y sueños. Como un guía silencioso, ilumina caminos para que los docentes forjen mentes curiosas, tejiendo conocimiento con la magia de la tecnología. ¡Descubre su poder y transforma la enseñanza!
+            </div>
+            <div class="educabot-message">
+                A tu derecha, <strong>EducaBot</strong> espera para resolver todas tus dudas sobre IA y guiarte en este viaje educativo.
+            </div>
+        </div>
+        <div id="webchat"></div>
+    </main>
+
+    <!-- Footer -->
+    <footer>
+        <p>&copy; 2025 Capacitación IA. <a href="https://x.ai" target="_blank">Powered by xAI</a></p>
+    </footer>
+</body>
+</html>

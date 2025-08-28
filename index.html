@@ -1,50 +1,12 @@
-<script type="text/javascript">
-        var gk_isXlsx = false;
-        var gk_xlsxFileLookup = {};
-        var gk_fileData = {};
-        function filledCell(cell) {
-          return cell !== '' && cell != null;
-        }
-        function loadFileData(filename) {
-        if (gk_isXlsx && gk_xlsxFileLookup[filename]) {
-            try {
-                var workbook = XLSX.read(gk_fileData[filename], { type: 'base64' });
-                var firstSheetName = workbook.SheetNames[0];
-                var worksheet = workbook.Sheets[firstSheetName];
-
-                // Convert sheet to JSON to filter blank rows
-                var jsonData = XLSX.utils.sheet_to_json(worksheet, { header: 1, blankrows: false, defval: '' });
-                // Filter out blank rows (rows where all cells are empty, null, or undefined)
-                var filteredData = jsonData.filter(row => row.some(filledCell));
-
-                // Heuristic to find the header row by ignoring rows with fewer filled cells than the next row
-                var headerRowIndex = filteredData.findIndex((row, index) =>
-                  row.filter(filledCell).length >= filteredData[index + 1]?.filter(filledCell).length
-                );
-                // Fallback
-                if (headerRowIndex === -1 || headerRowIndex > 25) {
-                  headerRowIndex = 0;
-                }
-
-                // Convert filtered JSON back to CSV
-                var csv = XLSX.utils.aoa_to_sheet(filteredData.slice(headerRowIndex)); // Create a new sheet from filtered array of arrays
-                csv = XLSX.utils.sheet_to_csv(csv, { header: 1 });
-                return csv;
-            } catch (e) {
-                console.error(e);
-                return "";
-            }
-        }
-        return gk_fileData[filename] || "";
-        }
-        </script><!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="es">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="Capacitación en IA para docentes con EducaBot ">
-    <title>Capacitación IA</title>
-    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@700&family=Roboto&display=swap" rel="stylesheet">
+    <meta name="description" content="Capacitación en IA con herramientas esenciales para docentes.">
+    <title>Capacitación IA - Tu Asistente Educativo Inteligente</title>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@700;600&family=Roboto:wght@400;500&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     <!-- Botpress Webchat Script -->
     <script src="https://cdn.botpress.cloud/webchat/v3.2/inject.js"></script>
     <script src="https://files.bpcontent.cloud/2025/08/28/18/20250828181855-SDCU21ES.js" defer></script>
@@ -56,134 +18,327 @@
         }
         body {
             font-family: 'Roboto', sans-serif;
-            background: img src="image.jpg";
+            background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url('image.jpg') no-repeat center/cover fixed;
             color: #333;
-            display: flex;
-            flex-direction: column;
             min-height: 100vh;
+            text-align: center;
+            overflow-x: hidden;
+        }
+        .background-pattern {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image: 
+                radial-gradient(circle at 10% 20%, rgba(255, 255, 255, 0.1) 0%, transparent 5%),
+                radial-gradient(circle at 90% 80%, rgba(255, 255, 255, 0.1) 0%, transparent 5%),
+                radial-gradient(circle at 50% 50%, rgba(255, 255, 255, 0.05) 0%, transparent 10%);
+            z-index: -1;
+            pointer-events: none;
         }
         header {
-            background-color: #17988C;
+            background: rgba(23, 152, 140, 0.95);
             color: white;
-            text-align: center;
-            padding: 20px 0;
+            padding: 30px 0;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+            position: relative;
+            overflow: hidden;
+        }
+        header::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" preserveAspectRatio="none"><path d="M0,0 L100,0 L100,100 Z" fill="rgba(255,255,255,0.1)"/></svg>');
+            background-size: 100% 100%;
+            z-index: -1;
         }
         header h1 {
             font-family: 'Montserrat', sans-serif;
-            font-size: 3rem;
+            font-size: 3.5rem;
             font-weight: 700;
-            letter-spacing: 2px;
+            letter-spacing: 3px;
             text-transform: uppercase;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+            margin-bottom: 10px;
+            animation: fadeInDown 1s ease;
+        }
+        header p {
+            font-size: 1.2rem;
+            opacity: 0.9;
+            max-width: 800px;
+            margin: 0 auto;
+            animation: fadeInUp 1s ease;
         }
         main {
-            flex: 1;
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 20px;
+            display: flex;
+            flex-direction: column;
             align-items: center;
-            padding: 20px;
+            padding: 40px 20px;
             max-width: 1200px;
             margin: 0 auto;
+            z-index: 1;
         }
-        .text-content {
-            text-align: left;
-            background: rgba(255, 255, 255, 0.9);
-            padding: 20px;
-            border-radius: 10px;
-        }
-        .poetic-description {
-            max-width: 500px;
-            margin-bottom: 20px;
-            font-size: 1.2rem;
-            line-height: 1.6;
-            color: #333;
-            font-style: italic;
-        }
-        .educabot-message {
-            max-width: 500px;
-            font-size: 1rem;
-            line-height: 1.5;
-            color: #333;
-        }
-        .educabot-message strong {
-            color: #17988C;
-            font-weight: 700;
-        }
-        #webchat {
-            width: 500px;
-            height: 500px;
-            background: rgba(255, 255, 255, 0.9);
-            border-radius: 10px;
-        }
-        #webchat .bpWebchat {
-            position: unset;
+        .container {
+            display: flex;
+            flex-direction: column;
+            gap: 40px;
             width: 100%;
-            height: 100%;
-            max-height: 100%;
-            max-width: 100%;
         }
-        #webchat .bpFab {
-            display: none;
+        @media (min-width: 900px) {
+            .container {
+                flex-direction: row;
+                align-items: flex-start;
+            }
+        }
+        .resources-container {
+            flex: 1;
+            min-width: 350px;
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            border-radius: 15px;
+            padding: 30px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
+            text-align: left;
+            transition: all 0.3s ease;
+        }
+        .resources-container:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.2);
+        }
+        .resources-container h2 {
+            font-family: 'Montserrat', sans-serif;
+            color: #17988C;
+            font-size: 2rem;
+            margin-bottom: 20px;
+            text-align: center;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+        }
+        .resources-container h2 i {
+            color: #667eea;
+        }
+        .resource-item {
+            margin-bottom: 25px;
+            padding: 15px;
+            border-radius: 10px;
+            background: rgba(23, 152, 140, 0.05);
+            transition: all 0.3s ease;
+            border-left: 4px solid #17988C;
+        }
+        .resource-item:hover {
+            background: rgba(23, 152, 140, 0.15);
+            transform: translateX(5px);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+        }
+        .resource-item h3 {
+            color: #17988C;
+            margin-bottom: 8px;
+            font-size: 1.2rem;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        .resource-item h3 i {
+            font-size: 1.1em;
+        }
+        .resource-item a {
+            color: #333;
+            text-decoration: none;
+            font-weight: 500;
+            display: block;
+            margin: 5px 0;
+            transition: color 0.3s ease;
+        }
+        .resource-item a:hover {
+            color: #17988C;
+            text-decoration: underline;
+        }
+        .resource-item p {
+            color: #666;
+            font-size: 0.95rem;
+            line-height: 1.5;
+            margin-top: 8px;
+        }
+        .chat-container {
+            flex: 1;
+            min-width: 350px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+     
+        }
+        .tag {
+            display: inline-block;
+            background: #17988C;
+            color: white;
+            padding: 3px 8px;
+            border-radius: 12px;
+            font-size: 0.7rem;
+            margin-left: 5px;
+            font-weight: bold;
         }
         footer {
-            background-color: #f8f9fa;
+            background-color: rgba(248, 249, 250, 0.9);
             text-align: center;
-            padding: 10px 0;
+            padding: 20px 0;
             font-size: 0.9rem;
+            color: #666;
+            margin-top: 40px;
+            border-top: 1px solid rgba(0, 0, 0, 0.1);
         }
         footer a {
             color: #17988C;
             text-decoration: none;
+            font-weight: 500;
         }
         footer a:hover {
             text-decoration: underline;
         }
+        .footer-content {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 10px;
+        }
         @media (max-width: 800px) {
-            main {
-                grid-template-columns: 1fr;
-                text-align: center;
-            }
             header h1 {
-                font-size: 2rem;
+                font-size: 2.5rem;
             }
-            .text-content {
-                margin: 15px 10px;
-            }
-            .poetic-description, .educabot-message {
-                max-width: 100%;
-            }
-            .poetic-description {
+            header p {
                 font-size: 1rem;
+                padding: 0 20px;
             }
             #webchat {
                 width: 100%;
                 height: 400px;
             }
+            .container {
+                flex-direction: column;
+            }
+            .resources-container {
+                margin-bottom: 30px;
+            }
+            main {
+                padding: 20px 15px;
+            }
+        }
+        @media (max-width: 480px) {
+            header h1 {
+                font-size: 2rem;
+            }
+            header p {
+                font-size: 0.9rem;
+                padding: 0 15px;
+            }
+            #webchat {
+                height: 350px;
+            }
+            .resources-container {
+                padding: 20px;
+            }
+            .resource-item h3 {
+                font-size: 1.1rem;
+            }
+            .resource-item p {
+                font-size: 0.9rem;
+            }
+            footer {
+                padding: 15px 0;
+            }
+        }
+        @keyframes fadeInDown {
+            from {
+                opacity: 0;
+                transform: translateY(-30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        .floating {
+            animation: floating 3s ease-in-out infinite;
+        }
+        @keyframes floating {
+            0% { transform: translateY(0px); }
+            50% { transform: translateY(-10px); }
+            100% { transform: translateY(0px); }
         }
     </style>
 </head>
 <body>
-    <!-- Header -->
+    <div class="background-pattern"></div>
+    
     <header>
-        <h1>Capacitación IA</h1>
+        <h1 class="floating">Capacitación IA</h1>
+        <p>Transforma tu enseñanza con las herramientas de inteligencia artificial más innovadoras</p>
     </header>
 
-    <!-- Main: Poetic Description, EducaBot Message, and Botpress Chat -->
     <main>
-        <div class="text-content">
-            <div class="poetic-description">
-                La Inteligencia Artificial es un susurro del futuro, un lienzo de posibilidades que danza entre datos y sueños. Como un guía silencioso, ilumina caminos para que los docentes forjen mentes curiosas, tejiendo conocimiento con la magia de la tecnología. ¡Descubre su poder y transforma la enseñanza!
+        <div class="container">
+            <!-- Recursos digitales a la izquierda -->
+            <div class="resources-container">
+                <h2><i class="fas fa-book-open"></i> Recursos Digitales</h2>
+                
+                <div class="resource-item">
+                    <h3><i class="fas fa-paint-brush"></i> Canva AI <span class="tag">Diseño</span></h3>
+                    <a href="https://www.canva.com/ai/" target="_blank">www.canva.com/ai/</a>
+                    <p>La plataforma de diseño gráfico que incorpora inteligencia artificial para crear presentaciones, materiales visuales y actividades interactivas automáticamente. Ideal para hacer que tus clases sean más atractivas.</p>
+                </div>
+                
+                <div class="resource-item">
+                    <h3><i class="fas fa-lightbulb"></i> Google Gemini <span class="tag">Ideas</span></h3>
+                    <a href="https://gemini.google.com/" target="_blank">gemini.google.com/</a>
+                    <p>Asistente conversacional avanzado para generar ideas, textos educativos, ejercicios y actividades. Perfecto para romper el bloqueo creativo y planificar tus clases con eficiencia.</p>
+                </div>
+                
+                <div class="resource-item">
+                    <h3><i class="fas fa-comments"></i> ChatGPT <span class="tag">Conversación</span></h3>
+                    <a href="https://chatgpt.com/" target="_blank">chatgpt.com/</a>
+                    <p>El modelo de lenguaje avanzado que te ayuda a crear actividades, corregir textos, responder preguntas de estudiantes y generar contenido educativo de alta calidad. Ideal para tareas de redacción y planificación.</p>
+                </div>
+                
+                <div class="resource-item">
+                    <h3><i class="fas fa-microchip"></i> Teachable Machine <span class="tag">Proyecto</span></h3>
+                    <a href="https://teachablemachine.withgoogle.com/" target="_blank">teachablemachine.withgoogle.com/</a>
+                    <p>Herramienta de Google que permite a tus alumnos crear modelos de IA simples usando imágenes, sonidos o poses. Excelente para proyectos STEM, aprendizaje activo y demostraciones de inteligencia artificial en el aula.</p>
+                </div>
+                
+                <div class="resource-item">
+                    <h3><i class="fas fa-school"></i> MagicSchool AI <span class="tag">Docentes</span></h3>
+                    <a href="https://www.magicschool.ai/" target="_blank">magicschool.ai/</a>
+                    <p>El asistente de IA para educadores más utilizado en el mundo, diseñado para simplificar tareas docentes, ahorrar tiempo y combatir el agotamiento profesional. Su interfaz intuitiva y prompts guiados hacen que la preparación y planificación sean más rápidas que nunca.</p>
+                </div>
             </div>
-            <div class="educabot-message">
-                A tu derecha, <strong>EducaBot</strong> espera para resolver todas tus dudas sobre IA y guiarte en este viaje educativo.
+            
+            <!-- Chatbot a la derecha -->
+            <div class="chat-container">
+                <div id="webchat"></div>
             </div>
         </div>
-        <div id="webchat"></div>
     </main>
 
-    <!-- Footer -->
     <footer>
-        <p>&copy; 2025 Capacitación IA. <a href="https://x.ai" target="_blank">Powered by xAI</a></p>
+        <div class="footer-content">
+            <p>&copy; 2025 Capacitación IA. Transformando la educación con inteligencia artificial.</p>
+            <p>Explora más sobre IA educativa en <a href="https://x.ai" target="_blank">x.ai</a></p>
+        </div>
     </footer>
 </body>
 </html>

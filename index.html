@@ -7,7 +7,6 @@
     <title>Capacitación IA - Tu Asistente Educativo Inteligente</title>
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@700;600&family=Roboto:wght@400;500&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
-    <!-- Botpress Webchat Script -->
     <script src="https://cdn.botpress.cloud/webchat/v3.2/inject.js"></script>
     <script src="https://files.bpcontent.cloud/2025/08/28/18/20250828181855-SDCU21ES.js" defer></script>
     <style>
@@ -38,7 +37,7 @@
             pointer-events: none;
         }
         header {
-            background: rgba(23, 152, 140, 0.95);
+            background: rgba(0, 51, 102, 0.95); /* Azul marino */
             color: white;
             padding: 30px 0;
             box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
@@ -111,7 +110,7 @@
         }
         .resources-container h2 {
             font-family: 'Montserrat', sans-serif;
-            color: #17988C;
+            color: #003366; /* Azul marino */
             font-size: 2rem;
             margin-bottom: 20px;
             text-align: center;
@@ -121,23 +120,23 @@
             gap: 10px;
         }
         .resources-container h2 i {
-            color: #667eea;
+            color: #1a73e8; /* Un azul complementario para el ícono */
         }
         .resource-item {
             margin-bottom: 25px;
             padding: 15px;
             border-radius: 10px;
-            background: rgba(23, 152, 140, 0.05);
+            background: rgba(0, 51, 102, 0.05); /* Azul marino muy claro */
             transition: all 0.3s ease;
-            border-left: 4px solid #17988C;
+            border-left: 4px solid #003366; /* Azul marino */
         }
         .resource-item:hover {
-            background: rgba(23, 152, 140, 0.15);
+            background: rgba(0, 51, 102, 0.15); /* Azul marino más claro en hover */
             transform: translateX(5px);
             box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
         }
         .resource-item h3 {
-            color: #17988C;
+            color: #003366; /* Azul marino */
             margin-bottom: 8px;
             font-size: 1.2rem;
             display: flex;
@@ -156,7 +155,7 @@
             transition: color 0.3s ease;
         }
         .resource-item a:hover {
-            color: #17988C;
+            color: #003366; /* Azul marino en hover */
             text-decoration: underline;
         }
         .resource-item p {
@@ -171,11 +170,10 @@
             display: flex;
             flex-direction: column;
             align-items: center;
-     
         }
         .tag {
             display: inline-block;
-            background: #17988C;
+            background: #003366; /* Azul marino */
             color: white;
             padding: 3px 8px;
             border-radius: 12px;
@@ -193,7 +191,7 @@
             border-top: 1px solid rgba(0, 0, 0, 0.1);
         }
         footer a {
-            color: #17988C;
+            color: #003366; /* Azul marino */
             text-decoration: none;
             font-weight: 500;
         }
@@ -280,6 +278,99 @@
             50% { transform: translateY(-10px); }
             100% { transform: translateY(0px); }
         }
+
+        /* Estilos para la flecha y el texto */
+        .arrow-and-text-container {
+            position: fixed;
+            bottom: 100px; 
+            right: 80px;
+            display: flex;
+            flex-direction: column;
+            align-items: flex-end; 
+            z-index: 9999;
+            animation: pulse 2s infinite ease-in-out; 
+        }
+        .arrow-text {
+            background-color: rgba(240, 248, 255, 0.9); 
+            color: #003366; /* Azul marino */
+            padding: 15px 25px;
+            border-radius: 10px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+            font-weight: bold;
+            font-size: 1.1rem;
+            margin-bottom: 20px;
+            max-width: 300px;
+            text-align: left;
+        }
+        .arrow {
+            width: 0;
+            height: 0;
+            border-left: 20px solid transparent;
+            border-right: 20px solid transparent;
+            border-top: 30px solid rgba(240, 248, 255, 0.9); 
+            transform: rotate(-45deg); 
+            margin-right: 0; 
+            animation: bounce 1.5s infinite; 
+        }
+        @keyframes pulse {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.03); } 
+            100% { transform: scale(1); }
+        }
+        @keyframes bounce {
+            0%, 100% { transform: translateY(0) rotate(-45deg); }
+            50% { transform: translateY(-8px) rotate(-45deg); } 
+        }
+
+        /* Media queries para responsividad de la flecha y el texto */
+        @media (max-width: 768px) {
+            .arrow-and-text-container {
+                bottom: 80px; 
+                right: 60px; 
+            }
+            .arrow-text {
+                font-size: 1rem;
+                padding: 12px 20px;
+                max-width: 250px;
+            }
+            .arrow {
+                border-left: 15px solid transparent;
+                border-right: 15px solid transparent;
+                border-top: 25px solid rgba(240, 248, 255, 0.9);
+            }
+            @keyframes bounce {
+                0%, 100% { transform: translateY(0) rotate(-45deg); }
+                50% { transform: translateY(-6px) rotate(-45deg); }
+            }
+        }
+
+        @media (max-width: 480px) {
+            .arrow-and-text-container {
+                bottom: 60px; 
+                right: 10px; 
+                flex-direction: column; 
+                align-items: center; 
+                width: calc(100% - 20px); 
+                left: 10px; 
+            }
+            .arrow-text {
+                font-size: 0.9rem;
+                padding: 10px 15px;
+                max-width: 90%; 
+                margin-bottom: 15px; 
+                text-align: center; 
+            }
+            .arrow {
+                border-left: 12px solid transparent;
+                border-right: 12px solid transparent;
+                border-top: 20px solid rgba(240, 248, 255, 0.9);
+                transform: rotate(180deg);
+            }
+            @keyframes bounce {
+                0%, 100% { transform: translateY(0) rotate(180deg); }
+                50% { transform: translateY(-5px) rotate(180deg); }
+            }
+        }
     </style>
 </head>
 <body>
@@ -292,10 +383,30 @@
 
     <main>
         <div class="container">
-            <!-- Recursos digitales a la izquierda -->
             <div class="resources-container">
                 <h2><i class="fas fa-book-open"></i> Recursos Digitales</h2>
+
+                <div class="resource-item">
+                    <h3><i class="fas fa-robot"></i> Recursos EduIA LAB (Ceibal) <span class="tag">Uruguay</span></h3>
+                    <a href="https://ceibal.edu.uy/institucional/eduia/eduia-lab/recursos/" target="_blank">ceibal.edu.uy/institucional/eduia/eduia-lab/recursos/</a>
+                    <p>Una colección de publicaciones, proyectos y capacitaciones de Ceibal centradas en la inteligencia artificial para la educación en Uruguay. Incluye materiales como el "Manifiesto IA" y cursos de formación para docentes.</p>
+                </div>
                 
+                <div class="resource-item">
+                    <h3><i class="fas fa-book-open"></i> Publicaciones</h3>
+                    <p>Manifiesto IA, SecundarIA: Explorando experiencias de inteligencia artificial en el aula, y otros documentos para comprender el impacto de la IA en la educación.</p>
+                </div>
+                
+                <div class="resource-item">
+                    <h3><i class="fas fa-project-diagram"></i> Proyectos</h3>
+                    <p>Descubre proyectos como "IA + micro:bit" para integrar la IA en el aula de manera práctica.</p>
+                </div>
+                
+                <div class="resource-item">
+                    <h3><i class="fas fa-graduation-cap"></i> Capacitaciones</h3>
+                    <p>Accede a cursos y talleres en línea como "Introducción a la inteligencia artificial" y postítulos para la formación continua de docentes.</p>
+                </div>
+
                 <div class="resource-item">
                     <h3><i class="fas fa-paint-brush"></i> Canva AI <span class="tag">Diseño</span></h3>
                     <a href="https://www.canva.com/ai/" target="_blank">www.canva.com/ai/</a>
@@ -325,14 +436,21 @@
                     <a href="https://www.magicschool.ai/" target="_blank">magicschool.ai/</a>
                     <p>El asistente de IA para educadores más utilizado en el mundo, diseñado para simplificar tareas docentes, ahorrar tiempo y combatir el agotamiento profesional. Su interfaz intuitiva y prompts guiados hacen que la preparación y planificación sean más rápidas que nunca.</p>
                 </div>
+
             </div>
             
-            <!-- Chatbot a la derecha -->
             <div class="chat-container">
                 <div id="webchat"></div>
             </div>
         </div>
     </main>
+
+    <div class="arrow-and-text-container">
+        <div class="arrow-text">
+            Chatea con el asistente diseñado para acompañarte en este valioso viaje que decides hacer por la educación.
+        </div>
+        <div class="arrow"></div>
+    </div>
 
     <footer>
         <div class="footer-content">

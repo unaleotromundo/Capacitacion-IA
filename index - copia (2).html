@@ -140,14 +140,6 @@
             background: rgba(0, 51, 102, 0.05);
             transition: all 0.3s ease;
             border-left: 4px solid #003366;
-            opacity: 0;
-            transform: translateY(20px);
-        }
-
-        .resource-item.fade-in {
-            opacity: 1;
-            transform: translateY(0);
-            transition: opacity 0.6s ease-out, transform 0.6s ease-out;
         }
 
         .resource-item:hover {
@@ -167,33 +159,20 @@
 
         .resource-item h3 i {
             font-size: 1.1em;
-            transition: transform 0.3s ease;
-        }
-
-        .resource-item:hover h3 i {
-            transform: scale(1.2);
-            color: #1a73e8;
         }
 
         .resource-item a {
-            display: inline-flex;
-            align-items: center;
-            justify-content: center;
-            gap: 8px;
-            padding: 10px 20px;
-            background-color: #003366;
-            color: white;
+            color: #333;
             text-decoration: none;
             font-weight: 500;
-            border-radius: 5px;
-            margin-top: 10px;
-            transition: background-color 0.3s ease, transform 0.3s ease;
+            display: block;
+            margin: 5px 0;
+            transition: color 0.3s ease;
         }
 
         .resource-item a:hover {
-            background-color: #1a73e8;
-            transform: translateY(-2px);
-            box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+            color: #003366;
+            text-decoration: underline;
         }
 
         .resource-item p {
@@ -350,96 +329,127 @@
             }
         }
 
-        /* Estilos para el nuevo cartel de chat */
-        .chat-call-to-action {
+        .arrow-and-text-container {
             position: fixed;
             bottom: 100px;
-            right: 20px;
-            background-color: #003366;
-            color: white;
-            padding: 15px 20px;
-            border-radius: 12px;
-            box-shadow: 0 6px 20px rgba(0, 0, 0, 0.25);
-            font-weight: 500;
-            font-size: 1.05rem;
-            max-width: 280px;
-            text-align: center;
-            line-height: 1.4;
+            right: 80px;
+            display: flex;
+            flex-direction: column;
+            align-items: flex-end;
             z-index: 999;
-            opacity: 0;
-            transform: scale(0.9) translateX(20px);
-            animation: fadeInScaleUp 0.8s forwards ease-out 0.5s,
-                       subtleBounce 2s infinite ease-in-out 1.5s;
+            animation: pulse 2s infinite ease-in-out;
         }
 
-        .chat-call-to-action::after {
-            content: '';
-            position: absolute;
-            bottom: -10px;
-            right: 25px;
+        .arrow-text {
+            background-color: rgba(240, 248, 255, 0.9);
+            color: #003366;
+            padding: 15px 25px;
+            border-radius: 10px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+            font-weight: bold;
+            font-size: 1.1rem;
+            margin-bottom: 20px;
+            max-width: 300px;
+            text-align: left;
+        }
+
+        .arrow {
             width: 0;
             height: 0;
-            border-left: 10px solid transparent;
-            border-right: 10px solid transparent;
-            border-top: 15px solid #003366;
-            transform: rotate(15deg);
+            border-left: 20px solid transparent;
+            border-right: 20px solid transparent;
+            border-top: 30px solid rgba(240, 248, 255, 0.9);
+            transform: rotate(-45deg);
+            margin-right: 0;
+            animation: bounce 1.5s infinite;
         }
 
-        @keyframes fadeInScaleUp {
-            from {
-                opacity: 0;
-                transform: scale(0.9) translateX(20px);
+        @keyframes pulse {
+            0% {
+                transform: scale(1);
             }
-            to {
-                opacity: 1;
-                transform: scale(1) translateX(0);
+
+            50% {
+                transform: scale(1.03);
+            }
+
+            100% {
+                transform: scale(1);
             }
         }
 
-        @keyframes subtleBounce {
-            0%, 100% { transform: translateY(0); }
-            50% { transform: translateY(-5px); }
+        @keyframes bounce {
+            0%, 100% {
+                transform: translateY(0) rotate(-45deg);
+            }
+
+            50% {
+                transform: translateY(-8px) rotate(-45deg);
+            }
         }
 
         @media (max-width: 768px) {
-            .chat-call-to-action {
+            .arrow-and-text-container {
                 bottom: 80px;
-                right: 15px;
-                font-size: 0.95rem;
-                max-width: 240px;
-                padding: 12px 18px;
+                right: 60px;
             }
-            .chat-call-to-action::after {
-                right: 20px;
-                border-left: 8px solid transparent;
-                border-right: 8px solid transparent;
-                border-top: 12px solid #003366;
+
+            .arrow-text {
+                font-size: 1rem;
+                padding: 12px 20px;
+                max-width: 250px;
+            }
+
+            .arrow {
+                border-left: 15px solid transparent;
+                border-right: 15px solid transparent;
+                border-top: 25px solid rgba(240, 248, 255, 0.9);
+            }
+
+            @keyframes bounce {
+                0%, 100% {
+                    transform: translateY(0) rotate(-45deg);
+                }
+
+                50% {
+                    transform: translateY(-6px) rotate(-45deg);
+                }
             }
         }
 
         @media (max-width: 480px) {
-            .chat-call-to-action {
+            .arrow-and-text-container {
                 bottom: 60px;
-                right: auto;
-                left: 50%;
-                transform: translateX(-50%);
-                font-size: 0.85rem;
-                max-width: calc(100% - 40px);
+                right: 10px;
+                flex-direction: column;
+                align-items: center;
+                width: calc(100% - 20px);
+                left: 10px;
+            }
+
+            .arrow-text {
+                font-size: 0.9rem;
                 padding: 10px 15px;
-                animation: fadeInScaleUp 0.8s forwards ease-out 0.5s,
-                           subtleBounceMobile 2s infinite ease-in-out 1.5s;
+                max-width: 90%;
+                margin-bottom: 15px;
+                text-align: center;
             }
-            .chat-call-to-action::after {
-                bottom: -10px;
-                right: 50%;
-                transform: translateX(50%) rotate(0deg);
-                border-top: 15px solid #003366;
-                border-left: 10px solid transparent;
-                border-right: 10px solid transparent;
+
+            .arrow {
+                border-left: 12px solid transparent;
+                border-right: 12px solid transparent;
+                border-top: 20px solid rgba(240, 248, 255, 0.9);
+                transform: rotate(180deg);
             }
-            @keyframes subtleBounceMobile {
-                0%, 100% { transform: translateX(-50%) translateY(0); }
-                50% { transform: translateX(-50%) translateY(-5px); }
+
+            @keyframes bounce {
+                0%, 100% {
+                    transform: translateY(0) rotate(180deg);
+                }
+
+                50% {
+                    transform: translateY(-5px) rotate(180deg);
+                }
             }
         }
 
@@ -470,8 +480,7 @@
 
         .podcast-button:hover {
             transform: scale(1.05);
-            background: #ffcc00;
-            border-color: #e6b800;
+            background: #e6f0ff;
         }
 
         .podcast-button i {
@@ -566,67 +575,67 @@
 
                 <div class="resource-item">
                     <h3><i class="fas fa-robot"></i> Recursos EduIA LAB (Ceibal) <span class="tag">Uruguay</span></h3>
-                    <a href="https://ceibal.edu.uy/institucional/eduia/eduia-lab/recursos/" target="_blank">Visitar sitio <i class="fas fa-arrow-right"></i></a>
+                    <a href="https://ceibal.edu.uy/institucional/eduia/eduia-lab/recursos/" target="_blank">ceibal.edu.uy/institucional/eduia/eduia-lab/recursos/</a>
                     <p>Una colección de publicaciones, proyectos y capacitaciones de Ceibal centradas en la inteligencia artificial para la educación en Uruguay. Incluye materiales como el "Manifiesto IA" y cursos de formación para docentes.</p>
                 </div>
                 <div class="resource-item">
                     <h3><i class="fas fa-paint-brush"></i> Canva AI <span class="tag">Diseño</span></h3>
-                    <a href="https://www.canva.com/ai/" target="_blank">Visitar sitio <i class="fas fa-arrow-right"></i></a>
+                    <a href="https://www.canva.com/ai/" target="_blank">www.canva.com/ai/</a>
                     <p>La plataforma de diseño gráfico que incorpora inteligencia artificial para crear presentaciones, materiales visuales y actividades interactivas automáticamente. Ideal para hacer que tus clases sean más atractivas.</p>
                 </div>
                 <div class="resource-item">
                     <h3><i class="fas fa-lightbulb"></i> Google Gemini <span class="tag">Ideas</span></h3>
-                    <a href="https://gemini.google.com/" target="_blank">Visitar sitio <i class="fas fa-arrow-right"></i></a>
+                    <a href="https://gemini.google.com/" target="_blank">gemini.google.com/</a>
                     <p>Asistente conversacional avanzado para generar ideas, textos educativos, ejercicios y actividades. Perfecto para romper el bloqueo creativo y planificar tus clases con eficiencia.</p>
                 </div>
                 <div class="resource-item">
                     <h3><i class="fas fa-comments"></i> ChatGPT <span class="tag">Conversación</span></h3>
-                    <a href="https://chatgpt.com/" target="_blank">Visitar sitio <i class="fas fa-arrow-right"></i></a>
+                    <a href="https://chatgpt.com/" target="_blank">chatgpt.com/</a>
                     <p>El modelo de lenguaje avanzado que te ayuda a crear actividades, corregir textos, responder preguntas de estudiantes y generar contenido educativo de alta calidad. Ideal para tareas de redacción y planificación.</p>
                 </div>
                 <div class="resource-item">
                     <h3><i class="fas fa-microchip"></i> Teachable Machine <span class="tag">Proyecto</span></h3>
-                    <a href="https://teachablemachine.withgoogle.com/" target="_blank">Visitar sitio <i class="fas fa-arrow-right"></i></a>
+                    <a href="https://teachablemachine.withgoogle.com/" target="_blank">teachablemachine.withgoogle.com/</a>
                     <p>Herramienta de Google que permite a tus alumnos crear modelos de IA simples usando imágenes, sonidos o poses. Excelente para proyectos STEM, aprendizaje activo y demostraciones de inteligencia artificial en el aula.</p>
                 </div>
                 <div class="resource-item">
                     <h3><i class="fas fa-school"></i> MagicSchool AI <span class="tag">Docentes</span></h3>
-                    <a href="https://www.magicschool.ai/" target="_blank">Visitar sitio <i class="fas fa-arrow-right"></i></a>
+                    <a href="https://www.magicschool.ai/" target="_blank">magicschool.ai/</a>
                     <p>El asistente de IA para educadores más utilizado en el mundo, diseñado para simplificar tareas docentes, ahorrar tiempo y combatir el agotamiento profesional. Su interfaz intuitiva y prompts guiados hacen que la preparación y planificación sean más rápidas que nunca.</p>
                 </div>
                 <div class="resource-item">
                     <h3><i class="fas fa-chart-line"></i> Califica</h3>
-                    <a href="https://app.califica.ai/login" target="_blank">Visitar sitio <i class="fas fa-arrow-right"></i></a>
+                    <a href="https://app.califica.ai/login" target="_blank">app.califica.ai/login</a>
                     <p>Plataforma para docentes de Latinoamérica que ayuda a generar mapas conceptuales, rúbricas y otros materiales educativos para reducir la carga de trabajo.</p>
                 </div>
                 <div class="resource-item">
                     <h3><i class="fas fa-image"></i> Leonardo AI <span class="tag">Diseño</span></h3>
-                    <a href="https://leonardo.ai/" target="_blank">Visitar sitio <i class="fas fa-arrow-right"></i></a>
+                    <a href="https://leonardo.ai/" target="_blank">leonardo.ai/</a>
                     <p>Plataforma de IA generativa para la creación de contenido visual. Permite generar imágenes y vídeos a partir de texto, ideal para crear recursos para tus clases y proyectos artísticos.</p>
                 </div>
                 <div class="resource-item">
                     <h3><i class="fas fa-microchip"></i> Google AI for Educators <span class="tag">Docentes</span></h3>
-                    <a href="https://grow.google/ai-for-educators/" target="_blank">Visitar sitio <i class="fas fa-arrow-right"></i></a>
+                    <a href="https://grow.google/ai-for-educators/" target="_blank">grow.google/ai-for-educators/</a>
                     <p>Una colección de herramientas de inteligencia artificial de Google diseñadas específicamente para educadores. Incluye recursos, guías y cursos para integrar la IA en el aula y mejorar los procesos de enseñanza.</p>
                 </div>
                 <div class="resource-item">
                     <h3><i class="fas fa-school"></i> EDTK <span class="tag">Plataforma</span></h3>
-                    <a href="https://edtk.co/" target="_blank">Visitar sitio <i class="fas fa-arrow-right"></i></a>
+                    <a href="https://edtk.co/" target="_blank">edtk.co/</a>
                     <p>Plataforma para docentes que utiliza la IA para generar actividades, planificaciones de clase, y evaluaciones de manera rápida y eficiente. Ideal para ahorrar tiempo en la preparación del material didáctico.</p>
                 </div>
                 <div class="resource-item">
                     <h3><i class="fas fa-gamepad"></i> Kahoot! <span class="tag">Juego</span></h3>
-                    <a href="https://create.kahoot.it/page/make" target="_blank">Visitar sitio <i class="fas fa-arrow-right"></i></a>
+                    <a href="https://create.kahoot.it/page/make" target="_blank">create.kahoot.it/page/make</a>
                     <p>La conocida plataforma de aprendizaje basada en juegos ahora incorpora IA para ayudarte a crear cuestionarios y juegos interactivos de forma más rápida. Perfecto para hacer las clases más dinámicas y divertidas.</p>
                 </div>
                 <div class="resource-item">
                     <h3><i class="fas fa-music"></i> AI Duet <span class="tag">Creatividad</span></h3>
-                    <a href="https://experiments.withgoogle.com/ai/ai-duet/view/" target="_blank">Visitar sitio <i class="fas fa-arrow-right"></i></a>
+                    <a href="https://experiments.withgoogle.com/ai/ai-duet/view/" target="_blank">experiments.withgoogle.com/ai/ai-duet/view/</a>
                     <p>Un experimento interactivo de Google que te permite tocar el piano con una inteligencia artificial. Tus alumnos pueden aprender de forma lúdica sobre la interacción entre humanos e IA mientras crean música.</p>
                 </div>
                 <div class="resource-item">
                     <h3><i class="fas fa-pen-nib"></i> Autodraw <span class="tag">Arte</span></h3>
-                    <a href="https://www.autodraw.com/" target="_blank">Visitar sitio <i class="fas fa-arrow-right"></i></a>
+                    <a href="https://www.autodraw.com/" target="_blank">www.autodraw.com/</a>
                     <p>Una herramienta de Google que usa aprendizaje automático para adivinar lo que estás dibujando y reemplazarlo con una imagen profesional. Es una forma fácil y divertida de crear iconos y dibujos para presentaciones y materiales.</p>
                 </div>
             </div>
@@ -635,8 +644,11 @@
             </div>
         </div>
     </main>
-    <div class="chat-call-to-action">
-        Chatea con el asistente diseñado para acompañarte en este valioso viaje.
+    <div class="arrow-and-text-container">
+        <div class="arrow-text">
+            Chatea con el asistente diseñado para acompañarte en este valioso viaje.
+        </div>
+        <div class="arrow"></div>
     </div>
     <div class="podcast-buttons-container">
         <a class="podcast-button" data-file="podcastia1.m4a" onclick="handlePodcastClick(this)">
@@ -700,19 +712,6 @@
                 });
             }
         }
-
-        const observer = new IntersectionObserver((entries) => {
-            entries.forEach(entry => {
-                if (entry.isIntersecting) {
-                    entry.target.classList.add('fade-in');
-                    observer.unobserve(entry.target);
-                }
-            });
-        }, { threshold: 0.2 });
-
-        document.querySelectorAll('.resource-item').forEach(item => {
-            observer.observe(item);
-        });
     </script>
 </body>
 </html>

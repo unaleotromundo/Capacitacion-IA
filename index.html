@@ -57,6 +57,14 @@
             z-index: -1;
         }
 
+        .header-content {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+        }
+
         header h1 {
             font-family: 'Montserrat', sans-serif;
             font-size: 3.5rem;
@@ -64,8 +72,38 @@
             letter-spacing: 3px;
             text-transform: uppercase;
             text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
-            margin-bottom: 10px;
             animation: fadeInDown 1s ease;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 20px;
+        }
+
+        /* Estilos para el logo del microchip con texto */
+        .logo-container {
+            position: relative;
+            width: 50px;
+            height: 50px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .logo-microchip-icon {
+            font-size: 3.5rem; /* Tamaño grande para el ícono del chip */
+            color: #ffcc00;
+            animation: spin-and-pulse 3s linear infinite;
+        }
+
+        .logo-microchip-text {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 0.8rem;
+            font-weight: 900;
+            color: #003366;
+            position: absolute;
+            transform: translate(-50%, -50%);
+            top: 50%;
+            left: 50%;
         }
 
         header p {
@@ -280,8 +318,14 @@
         @media (max-width: 480px) {
             header h1 {
                 font-size: 2rem;
+                gap: 10px;
             }
-
+            .logo-microchip-icon {
+                font-size: 2.5rem;
+            }
+            .logo-microchip-text {
+                font-size: 0.6rem;
+            }
             header p {
                 font-size: 0.9rem;
                 padding: 0 15px;
@@ -329,6 +373,21 @@
             to {
                 opacity: 1;
                 transform: translateY(0);
+            }
+        }
+
+        @keyframes spin-and-pulse {
+            0% {
+                transform: rotate(0deg) scale(1);
+                filter: drop-shadow(0 0 10px rgba(255, 204, 0, 0.5));
+            }
+            50% {
+                transform: rotate(180deg) scale(1.1);
+                filter: drop-shadow(0 0 20px rgba(255, 204, 0, 0.8));
+            }
+            100% {
+                transform: rotate(360deg) scale(1);
+                filter: drop-shadow(0 0 10px rgba(255, 204, 0, 0.5));
             }
         }
 
@@ -490,16 +549,11 @@
         .podcast-button .loading-icon {
             font-size: 1.5rem;
         }
-
-        .podcast-button .loading-icon.fa-spin {
-            animation: spin 1s linear infinite;
-        }
-
+        
         @keyframes spin {
             0% {
                 transform: rotate(0deg);
             }
-
             100% {
                 transform: rotate(360deg);
             }
@@ -555,8 +609,16 @@
     <div class="background-pattern"></div>
 
     <header>
-        <h1 class="floating">Capacitación IA</h1>
-        <p>Transforma tu enseñanza con las herramientas de inteligencia artificial más innovadoras</p>
+        <div class="header-content">
+            <h1 class="floating">
+                <span class="logo-container">
+                    <i class="fas fa-microchip logo-microchip-icon"></i>
+                    <span class="logo-microchip-text"></span>
+                </span>
+                Capacitación IA
+            </h1>
+            <p>Transforma tu enseñanza con las herramientas de inteligencia artificial más innovadoras</p>
+        </div>
     </header>
 
     <main>

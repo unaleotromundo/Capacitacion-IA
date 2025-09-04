@@ -136,11 +136,23 @@
             .container {
                 flex-direction: row;
                 align-items: flex-start;
+                gap: 20px;
+            }
+            .resources-container {
+                display: grid;
+                grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+                gap: 20px;
+                flex: 1.5; /* Prioriza más espacio para los recursos */
+            }
+            .chat-container {
+                flex: 1; /* El chat toma el espacio restante */
+            }
+            .resource-item {
+                margin-bottom: 0 !important;
             }
         }
 
         .resources-container {
-            flex: 1;
             min-width: 350px;
             background: rgba(255, 255, 255, 0.95);
             backdrop-filter: blur(10px);
@@ -202,6 +214,8 @@
             display: flex;
             align-items: center;
             gap: 8px;
+            flex-wrap: wrap;
+            word-wrap: break-word;
         }
 
         .resource-item h3 i {
@@ -240,10 +254,10 @@
             font-size: 0.95rem;
             line-height: 1.5;
             margin-top: 8px;
+            word-wrap: break-word;
         }
 
         .chat-container {
-            flex: 1;
             min-width: 350px;
             display: flex;
             flex-direction: column;
@@ -955,7 +969,7 @@
         </div>
     </main>
     <div class="chat-call-to-action" title="Mensaje para iniciar el chat con el asistente">
-        Cualquier cosa que necesites, estoy a las órdenes!!
+        Hola soy Niko me entrenaron para acompañarte en este valioso viaje!!
     </div>
     <div class="podcast-buttons-container">
         <a class="podcast-button" data-file="podcastia1.m4a" onclick="handlePodcastClick(this)" title="Reproducir Podcast Introductorio">

@@ -629,35 +629,28 @@
             transition: transform 0.3s ease, box-shadow 0.3s ease;
         }
 
+        .cosmic-bubble::after {
+            content: '';
+            position: absolute;
+            top: -10px;
+            left: -10px;
+            right: -10px;
+            bottom: -10px;
+            border: 2px solid rgba(255, 255, 255, 0.4);
+            border-radius: 50%;
+            animation: pulse-ring 2s infinite cubic-bezier(0.25, 0.46, 0.45, 0.94);
+            pointer-events: none;
+        }
+
         .cosmic-bubble:hover {
             transform: scale(1.08);
-            box-shadow: 0 0 20px rgba(0, 51, 102, 0.9), 0 0 35px rgba(26, 115, 232, 0.7);
+            box-shadow: 0 0 20px #fff, 0 0 30px #003366, 0 0 40px #1a73e8, 0 0 50px #ffcc00;
         }
-        
+
         .cosmic-bubble i {
             color: white;
             font-size: 2.5rem;
             z-index: 2;
-        }
-
-        .cosmic-link-ring {
-            position: absolute;
-            width: 100px;
-            height: 100px;
-            border: 3px solid #ffcc00;
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            cursor: pointer;
-            z-index: 1;
-            opacity: 0;
-            animation: pulse-ring 2s infinite ease-out;
-        }
-
-        .cosmic-bubble-container:hover .cosmic-link-ring {
-            opacity: 1;
-            animation-play-state: running;
         }
         
         @keyframes pulse-ring {
@@ -678,31 +671,34 @@
             .cosmic-bubble i {
                 font-size: 2.2rem;
             }
-            .cosmic-link-ring {
-                width: 90px;
-                height: 90px;
+            .cosmic-bubble::after {
+                top: -8px;
+                left: -8px;
+                right: -8px;
+                bottom: -8px;
             }
         }
 
         /* Estilos y animación para la abeja que deambula */
         .wandering-bee {
             position: fixed;
-            width: 50px;
-            height: 50px;
+            width: 40px;
+            height: 40px;
             background: linear-gradient(45deg, #ffcc00, #ff9900);
             border-radius: 50%;
             display: flex;
             align-items: center;
             justify-content: center;
-            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
             z-index: 998;
             transition: transform 2s ease-in-out, background 0.5s ease;
             cursor: pointer;
         }
 
-        .wandering-bee i {
-            font-size: 2rem;
-            color: #003366;
+        .wandering-bee svg {
+            width: 60%;
+            height: 60%;
+            fill: #003366; /* Color azul oscuro de la abeja */
             animation: pulse 1.5s infinite ease-in-out;
         }
         
@@ -752,14 +748,32 @@
 
 <body>
     <div class="background-pattern"></div>
-    <a href="indexviaje.html" class="wandering-bee">
-<i class="fa-solid fa-bee fa-flip"></i>
+    <a href="indexviaje.html" class="wandering-bee" title="Tu Viaje, Curso Rápido">
+        <svg version="1.0" xmlns="http://www.w3.org/2000/svg"
+         width="256.000000pt" height="252.000000pt" viewBox="0 0 256.000000 252.000000"
+         preserveAspectRatio="xMidYMid meet">
+        <g transform="translate(0.000000,252.000000) scale(0.100000,-0.100000)"
+        fill="#000000" stroke="none">
+        <path d="M1010 2018 c-31 -34 -26 -72 18 -121 37 -41 38 -43 26 -77 -7 -19
+        -13 -69 -13 -111 l-1 -76 -51 -11 c-128 -30 -263 -123 -338 -234 -75 -110
+        -111 -229 -111 -366 0 -58 3 -66 31 -94 l30 -31 102 6 c56 3 123 13 150 21
+        210 67 361 227 414 441 19 76 20 75 48 -38 31 -120 120 -244 232 -321 97 -66
+        194 -97 320 -104 l102 -5 32 32 31 32 -5 112 c-7 165 -56 282 -164 391 -85 87
+        -149 121 -320 172 -9 2 -13 27 -13 80 0 42 -5 94 -12 116 -11 38 -10 40 25 76
+        90 93 -5 186 -97 96 -36 -35 -39 -36 -76 -25 -49 14 -125 14 -167 -1 -31 -11
+        -35 -10 -71 25 -45 44 -89 50 -122 15z"/>
+        <path d="M1205 955 c-57 -56 -103 -91 -154 -117 l-73 -38 313 0 314 0 -42 20
+        c-66 30 -131 77 -208 149 l-70 66 -80 -80z"/>
+        <path d="M1126 568 c96 -91 132 -118 160 -118 24 0 109 66 184 144 l44 46
+        -232 0 -232 0 76 -72z"/>
+        </g>
+        </svg>
     </a>
 
     <header>
         <div class="header-content">
-            <h1 class="floating">
-                <span class="logo-container">
+            <h1 class="floating" title="Título principal de la página">
+                <span class="logo-container" title="Logo de inteligencia artificial">
                     <i class="fas fa-microchip logo-microchip-icon"></i>
                     <span class="logo-microchip-text"></span>
                 </span>
@@ -771,69 +785,74 @@
 
     <main>
         <div class="container">
-            <div class="resources-container">
+            <div class="resources-container" title="Contenedor de recursos digitales">
                 <h2><i class="fas fa-book-open"></i> Recursos Digitales</h2>
 
-                <div class="resource-item">
+                <div class="resource-item" title="Recurso: Recursos EduIA LAB">
                     <h3><i class="fas fa-robot"></i> Recursos EduIA LAB (Ceibal) <span class="tag">Uruguay</span></h3>
-                    <a href="https://ceibal.edu.uy/institucional/eduia/eduia-lab/recursos/" target="_blank">Visitar sitio <i class="fas fa-arrow-right"></i></a>
+                    <a href="https://ceibal.edu.uy/institucional/eduia/eduia-lab/recursos/" target="_blank" title="Visitar el sitio web de EduIA LAB">Visitar sitio <i class="fas fa-arrow-right"></i></a>
                     <p>Una colección de publicaciones, proyectos y capacitaciones de Ceibal centradas en la inteligencia artificial para la educación en Uruguay. Incluye materiales como el "Manifiesto IA" y cursos de formación para docentes.</p>
                 </div>
-                <div class="resource-item">
+                <div class="resource-item" title="Recurso: NotebookLM">
+                    <h3><i class="fas fa-book-open"></i> Google NotebookLM <span class="tag">Asistente</span> <span class="tag">Organización</span></h3>
+                    <a href="https://notebooklm.google.com/" target="_blank" title="Visitar NotebookLM">Visitar sitio <i class="fas fa-arrow-right"></i></a>
+                    <p>Un asistente de investigación y escritura que te ayuda a resumir documentos, crear ideas y organizar tu trabajo. Ideal para docentes y estudiantes que necesitan gestionar grandes cantidades de información.</p>
+                </div>
+                <div class="resource-item" title="Recurso: Canva AI">
                     <h3><i class="fas fa-paint-brush"></i> Canva AI <span class="tag">Diseño</span></h3>
-                    <a href="https://www.canva.com/ai/" target="_blank">Visitar sitio <i class="fas fa-arrow-right"></i></a>
+                    <a href="https://www.canva.com/ai/" target="_blank" title="Visitar el sitio web de Canva AI">Visitar sitio <i class="fas fa-arrow-right"></i></a>
                     <p>La plataforma de diseño gráfico que incorpora inteligencia artificial para crear presentaciones, materiales visuales y actividades interactivas automáticamente. Ideal para hacer que tus clases sean más atractivas.</p>
                 </div>
-                <div class="resource-item">
+                <div class="resource-item" title="Recursos: Google Gemini y ChatGPT">
                     <h3 class="grouped-icons"><span class="icon-circle"><i class="fas fa-lightbulb"></i></span><span class="icon-circle"><i class="fas fa-comments"></i></span> Google Gemini & ChatGPT <span class="tag">Ideas</span> <span class="tag">Conversación</span></h3>
-                    <a href="https://gemini.google.com/" target="_blank">Visitar Gemini <i class="fas fa-arrow-right"></i></a>
-                    <a href="https://chatgpt.com/" target="_blank">Visitar ChatGPT <i class="fas fa-arrow-right"></i></a>
+                    <a href="https://gemini.google.com/" target="_blank" title="Visitar Google Gemini">Visitar Gemini <i class="fas fa-arrow-right"></i></a>
+                    <a href="https://chatgpt.com/" target="_blank" title="Visitar ChatGPT">Visitar ChatGPT <i class="fas fa-arrow-right"></i></a>
                     <p>Google Gemini es un asistente conversacional avanzado para generar ideas, textos educativos, ejercicios y actividades. Por su parte, ChatGPT es un modelo de lenguaje avanzado que te ayuda a crear actividades, corregir textos, responder preguntas de estudiantes y generar contenido educativo de alta calidad. Ambas son perfectas para romper el bloqueo creativo y planificar tus clases con eficiencia.</p>
                 </div>
-                <div class="resource-item teachers-tools">
+                <div class="resource-item teachers-tools" title="Recursos: MagicSchool AI y EDTK">
                     <h3 class="grouped-icons"><span class="icon-circle"><i class="fas fa-school"></i></span><span class="icon-circle"><i class="fas fa-robot"></i></span> MagicSchool AI & EDTK <span class="tag">Docentes</span><span class="tag">Plataforma</span></h3>
-                    <a href="https://www.magicschool.ai/" target="_blank">Visitar MagicSchool AI <i class="fas fa-arrow-right"></i></a>
-                    <a href="https://edtk.co/" target="_blank">Visitar EDTK <i class="fas fa-arrow-right"></i></a>
+                    <a href="https://www.magicschool.ai/" target="_blank" title="Visitar MagicSchool AI">Visitar MagicSchool AI <i class="fas fa-arrow-right"></i></a>
+                    <a href="https://edtk.co/" target="_blank" title="Visitar EDTK">Visitar EDTK <i class="fas fa-arrow-right"></i></a>
                     <p>MagicSchool AI es el asistente de IA para educadores más utilizado, diseñado para simplificar tareas docentes, ahorrar tiempo y combatir el agotamiento profesional. Su interfaz intuitiva y prompts guiados hacen que la preparación y planificación sean más rápidas que nunca. Por otro lado, EDTK es una plataforma para docentes que utiliza la IA para generar actividades, planificaciones de clase y evaluaciones de manera rápida y eficiente. Ambas herramientas son ideales para reducir la carga de trabajo y optimizar los procesos de enseñanza.</p>
                 </div>
-                <div class="resource-item">
+                <div class="resource-item" title="Recurso: Tabla Comparativa de IA">
                     <h3><i class="fas fa-table"></i> Tabla Comparativa de IA <span class="tag">Análisis</span></h3>
-                    <a href="https://andreaoviedov.com/ia/" target="_blank">Ver tabla interactiva <i class="fas fa-arrow-right"></i></a>
+                    <a href="https://andreaoviedov.com/ia/" target="_blank" title="Ver la tabla interactiva de IA">Ver tabla interactiva <i class="fas fa-arrow-right"></i></a>
                     <p>Explora y compara herramientas de inteligencia artificial a través de una tabla interactiva que te permite filtrar y encontrar el recurso ideal para tus necesidades educativas.</p>
                 </div>
-                <div class="resource-item">
+                <div class="resource-item" title="Recurso: Teachable Machine">
                     <h3><i class="fas fa-microchip"></i> Teachable Machine <span class="tag">Proyecto</span></h3>
-                    <a href="https://teachablemachine.withgoogle.com/" target="_blank">Visitar sitio <i class="fas fa-arrow-right"></i></a>
+                    <a href="https://teachablemachine.withgoogle.com/" target="_blank" title="Visitar Teachable Machine de Google">Visitar sitio <i class="fas fa-arrow-right"></i></a>
                     <p>Herramienta de Google que permite a tus alumnos crear modelos de IA simples usando imágenes, sonidos o poses. Excelente para proyectos STEM, aprendizaje activo y demostraciones de inteligencia artificial en el aula.</p>
                 </div>
-                <div class="resource-item">
+                <div class="resource-item" title="Recurso: Califica">
                     <h3><i class="fas fa-chart-line"></i> Califica</h3>
-                    <a href="https://app.califica.ai/login" target="_blank">Visitar sitio <i class="fas fa-arrow-right"></i></a>
+                    <a href="https://app.califica.ai/login" target="_blank" title="Visitar la plataforma Califica.ai">Visitar sitio <i class="fas fa-arrow-right"></i></a>
                     <p>Plataforma para docentes de Latinoamérica que ayuda a generar mapas conceptuales, rúbricas y otros materiales educativos para reducir la carga de trabajo.</p>
                 </div>
-                <div class="resource-item">
+                <div class="resource-item" title="Recurso: Leonardo AI">
                     <h3><i class="fas fa-image"></i> Leonardo AI <span class="tag">Diseño</span></h3>
-                    <a href="https://leonardo.ai/" target="_blank">Visitar sitio <i class="fas fa-arrow-right"></i></a>
+                    <a href="https://leonardo.ai/" target="_blank" title="Visitar el sitio web de Leonardo AI">Visitar sitio <i class="fas fa-arrow-right"></i></a>
                     <p>Plataforma de IA generativa para la creación de contenido visual. Permite generar imágenes y vídeos a partir de texto, ideal para crear recursos para tus clases y proyectos artísticos.</p>
                 </div>
-                <div class="resource-item">
+                <div class="resource-item" title="Recurso: Google AI for Educators">
                     <h3><i class="fas fa-microchip"></i> Google AI for Educators <span class="tag">Docentes</span></h3>
-                    <a href="https://grow.google/ai-for-educators/" target="_blank">Visitar sitio <i class="fas fa-arrow-right"></i></a>
+                    <a href="https://grow.google/ai-for-educators/" target="_blank" title="Visitar el sitio web de Google AI for Educators">Visitar sitio <i class="fas fa-arrow-right"></i></a>
                     <p>Una colección de herramientas de inteligencia artificial de Google diseñadas específicamente para educadores. Incluye recursos, guías y cursos para integrar la IA en el aula y mejorar los procesos de enseñanza.</p>
                 </div>
-                <div class="resource-item">
+                <div class="resource-item" title="Recurso: Kahoot!">
                     <h3><i class="fas fa-gamepad"></i> Kahoot! <span class="tag">Juego</span></h3>
-                    <a href="https://create.kahoot.it/page/make" target="_blank">Visitar sitio <i class="fas fa-arrow-right"></i></a>
+                    <a href="https://create.kahoot.it/page/make" target="_blank" title="Crear un Kahoot! con IA">Visitar sitio <i class="fas fa-arrow-right"></i></a>
                     <p>La conocida plataforma de aprendizaje basada en juegos ahora incorpora IA para ayudarte a crear cuestionarios y juegos interactivos de forma más rápida. Perfecto para hacer las clases más dinámicas y divertidas.</p>
                 </div>
-                <div class="resource-item">
+                <div class="resource-item" title="Recurso: AI Duet">
                     <h3><i class="fas fa-music"></i> AI Duet <span class="tag">Creatividad</span></h3>
-                    <a href="https://experiments.withgoogle.com/ai/ai-duet/view/" target="_blank">Visitar sitio <i class="fas fa-arrow-right"></i></a>
+                    <a href="https://experiments.withgoogle.com/ai/ai-duet/view/" target="_blank" title="Visitar AI Duet de Google">Visitar sitio <i class="fas fa-arrow-right"></i></a>
                     <p>Un experimento interactivo de Google que te permite tocar el piano con una inteligencia artificial. Tus alumnos pueden aprender de forma lúdica sobre la interacción entre humanos e IA mientras crean música.</p>
                 </div>
-                <div class="resource-item">
+                <div class="resource-item" title="Recurso: Autodraw">
                     <h3><i class="fas fa-pen-nib"></i> Autodraw <span class="tag">Arte</span></h3>
-                    <a href="https://www.autodraw.com/" target="_blank">Visitar sitio <i class="fas fa-arrow-right"></i></a>
+                    <a href="https://www.autodraw.com/" target="_blank" title="Visitar Autodraw de Google">Visitar sitio <i class="fas fa-arrow-right"></i></a>
                     <p>Una herramienta de Google que usa aprendizaje automático para adivinar lo que estás dibujando y reemplazarlo con una imagen profesional. Es una forma fácil y divertida de crear iconos y dibujos para presentaciones y materiales.</p>
                 </div>
             </div>
@@ -842,22 +861,21 @@
             </div>
         </div>
     </main>
-    <div class="chat-call-to-action">
+    <div class="chat-call-to-action" title="Mensaje para iniciar el chat con el asistente">
         Chatea con el asistente diseñado para acompañarte en este valioso viaje.
     </div>
     <div class="podcast-buttons-container">
-        <a class="podcast-button" data-file="podcastia1.m4a" onclick="handlePodcastClick(this)">
+        <a class="podcast-button" data-file="podcastia1.m4a" onclick="handlePodcastClick(this)" title="Reproducir Podcast Introductorio">
             <i class="fas fa-play-circle"></i>
             <span>Podcast Introductorio</span>
         </a>
-        <a class="podcast-button" data-file="podcastia2.m4a" onclick="handlePodcastClick(this)">
+        <a class="podcast-button" data-file="podcastia2.m4a" onclick="handlePodcastClick(this)" title="Reproducir Podcast SecundarIA">
             <i class="fas fa-play-circle"></i>
             <span>Podcast SecundarIA</span>
         </a>
     </div>
     
-    <div class="cosmic-bubble-container">
-        <div class="cosmic-link-ring" onclick="window.open('https://notebooklm.google.com/', '_blank');"></div>
+    <div class="cosmic-bubble-container" title="Reproducir el Podcast de NotebookLM para Estudiantes">
         <div class="cosmic-bubble" data-file="audionotebook.m4A" onclick="handlePodcastClick(this)">
             <i class="fas fa-play"></i>
         </div>
@@ -866,7 +884,7 @@
     <footer>
         <div class="footer-content">
             <p>&copy; 2025 Capacitación IA. Transformando la educación con inteligencia artificial.</p>
-            <p>Explora más sobre IA educativa en <a href="https://x.ai" target="_blank">x.ai</a></p>
+            <p>Explora más sobre IA educativa en <a href="https://x.ai" target="_blank" title="Explorar más sobre IA educativa">x.ai</a></p>
         </div>
     </footer>
     <script>
@@ -876,42 +894,75 @@
         function handlePodcastClick(button) {
             const file = button.getAttribute('data-file');
             const icon = button.querySelector('i');
-            if (currentAudio && currentButton === button) {
-                if (currentAudio.paused) {
-                    currentAudio.play();
-                    icon.className = 'fas fa-pause-circle';
+
+            if (currentAudio && currentButton !== button) {
+                currentAudio.pause();
+                currentAudio.currentTime = 0;
+                // Maneja el caso especial del ícono del botón de la burbuja
+                if (currentButton.classList.contains('cosmic-bubble')) {
+                    currentButton.querySelector('i').className = 'fas fa-play';
                 } else {
+                    currentButton.querySelector('i').className = 'fas fa-play-circle';
+                }
+            }
+
+            if (currentAudio && currentButton === button) {
+                if (!currentAudio.paused) {
                     currentAudio.pause();
-                    icon.className = 'fas fa-play-circle';
+                    if (button.classList.contains('cosmic-bubble')) {
+                        icon.className = 'fas fa-play';
+                    } else {
+                        icon.className = 'fas fa-play-circle';
+                    }
+                } else {
+                    currentAudio.play().then(() => {
+                        if (button.classList.contains('cosmic-bubble')) {
+                            icon.className = 'fas fa-pause';
+                        } else {
+                            icon.className = 'fas fa-pause-circle';
+                        }
+                    }).catch(e => {
+                        console.error("Error al reproducir audio:", e);
+                        if (button.classList.contains('cosmic-bubble')) {
+                            icon.className = 'fas fa-play';
+                        } else {
+                            icon.className = 'fas fa-play-circle';
+                        }
+                        alert("Hubo un problema al reproducir el audio. Por favor, asegúrate de que el archivo '" + file + "' esté en la misma carpeta.");
+                    });
                 }
             } else {
-                if (currentAudio) {
-                    currentAudio.pause();
-                    currentAudio.currentTime = 0;
-                    if (currentButton) {
-                        currentButton.querySelector('i').className = 'fas fa-play-circle';
-                    }
-                }
                 currentButton = button;
                 icon.className = 'fas fa-spinner fa-spin';
+
                 currentAudio = new Audio(file);
-                currentAudio.addEventListener('canplaythrough', () => {
-                    icon.className = 'fas fa-pause-circle';
-                    currentAudio.play();
-                }, {
-                    once: true
-                });
-                currentAudio.addEventListener('ended', () => {
-                    icon.className = 'fas fa-play-circle';
+                
+                currentAudio.play().then(() => {
+                    if (button.classList.contains('cosmic-bubble')) {
+                        icon.className = 'fas fa-pause';
+                    } else {
+                        icon.className = 'fas fa-pause-circle';
+                    }
+                }).catch(e => {
+                    console.error("Error de reproducción:", e);
+                    if (button.classList.contains('cosmic-bubble')) {
+                        icon.className = 'fas fa-play';
+                    } else {
+                        icon.className = 'fas fa-play-circle';
+                    }
+                    alert("Hubo un problema al reproducir el audio. Por favor, asegúrate de que el archivo '" + file + "' esté en la misma carpeta.");
                     currentButton = null;
                     currentAudio = null;
                 });
-                currentAudio.addEventListener('error', () => {
-                    console.error("Error al cargar el audio:", file);
-                    icon.className = 'fas fa-play-circle';
-                    alert("Hubo un problema al reproducir el audio. Por favor, asegúrate de que el archivo '" + file + "' esté en la misma carpeta.");
-                }, {
-                    once: true
+                
+                currentAudio.addEventListener('ended', () => {
+                    if (currentButton && currentButton.classList.contains('cosmic-bubble')) {
+                        currentButton.querySelector('i').className = 'fas fa-play';
+                    } else if (currentButton) {
+                        currentButton.querySelector('i').className = 'fas fa-play-circle';
+                    }
+                    currentButton = null;
+                    currentAudio = null;
                 });
             }
         }

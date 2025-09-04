@@ -10,6 +10,7 @@
     <script src="https://cdn.botpress.cloud/webchat/v3.2/inject.js"></script>
     <script src="https://files.bpcontent.cloud/2025/08/28/18/20250828181855-SDCU21ES.js" defer></script>
     <style>
+        /* CSS del modo responsive mejorado */
         * {
             margin: 0;
             padding: 0;
@@ -90,7 +91,7 @@
         }
 
         .logo-microchip-icon {
-            font-size: 3.5rem; /* Tamaño grande para el ícono del chip */
+            font-size: 3.5rem;
             color: #ffcc00;
             animation: spin-and-pulse 3s linear infinite;
         }
@@ -428,7 +429,7 @@
             opacity: 0;
             transform: scale(0.9) translateX(20px);
             animation: fadeInScaleUp 0.8s forwards ease-out 0.5s,
-                       subtleBounce 2s infinite ease-in-out 1.5s;
+                       pulse-pop 2s infinite ease-in-out 1.5s;
         }
 
         .chat-call-to-action::after {
@@ -455,9 +456,10 @@
             }
         }
 
-        @keyframes subtleBounce {
-            0%, 100% { transform: translateY(0); }
-            50% { transform: translateY(-5px); }
+        @keyframes pulse-pop {
+            0% { transform: scale(1); box-shadow: 0 6px 20px rgba(0, 0, 0, 0.25); }
+            50% { transform: scale(1.05); box-shadow: 0 10px 30px rgba(0, 0, 0, 0.4); }
+            100% { transform: scale(1); box-shadow: 0 6px 20px rgba(0, 0, 0, 0.25); }
         }
 
         @media (max-width: 768px) {
@@ -486,7 +488,7 @@
                 max-width: calc(100% - 40px);
                 padding: 10px 15px;
                 animation: fadeInScaleUp 0.8s forwards ease-out 0.5s,
-                           subtleBounceMobile 2s infinite ease-in-out 1.5s;
+                           pulse-pop-mobile 2s infinite ease-in-out 1.5s;
             }
             .chat-call-to-action::after {
                 bottom: -10px;
@@ -496,9 +498,9 @@
                 border-left: 10px solid transparent;
                 border-right: 10px solid transparent;
             }
-            @keyframes subtleBounceMobile {
-                0%, 100% { transform: translateX(-50%) translateY(0); }
-                50% { transform: translateX(-50%) translateY(-5px); }
+            @keyframes pulse-pop-mobile {
+                0%, 100% { transform: translateX(-50%) scale(1); }
+                50% { transform: translateX(-50%) scale(1.05); }
             }
         }
 
@@ -743,6 +745,97 @@
             border-left: 4px solid #1a73e8;
         }
 
+        /* Mejoras en la responsividad para móviles */
+        @media (max-width: 768px) {
+            .podcast-buttons-container {
+                bottom: 180px;
+                right: 15px;
+                flex-direction: column;
+                align-items: flex-end;
+            }
+
+            .podcast-button {
+                padding: 6px 12px;
+            }
+
+            .podcast-button i {
+                font-size: 1.2rem;
+                margin-right: 8px;
+            }
+
+            .podcast-button span {
+                font-size: 0.8rem;
+            }
+
+            .cosmic-bubble-container {
+                bottom: 250px;
+                right: 15px;
+            }
+
+            .wandering-bee {
+                top: 80px;
+                right: 20px;
+            }
+
+            .grouped-icons .icon-circle {
+                width: 35px;
+                height: 35px;
+            }
+
+            .grouped-icons .icon-circle i {
+                font-size: 1em;
+            }
+
+        }
+
+        @media (max-width: 480px) {
+            .wandering-bee {
+                width: 35px;
+                height: 35px;
+                right: 15px;
+                top: 60px;
+            }
+
+            .podcast-buttons-container {
+                bottom: 120px;
+                right: auto;
+                left: 50%;
+                transform: translateX(-50%);
+                flex-direction: column;
+                align-items: center;
+                gap: 8px;
+                width: auto;
+            }
+            
+            .podcast-button {
+                width: 100%;
+                max-width: 200px;
+                justify-content: center;
+            }
+
+            .cosmic-bubble-container {
+                bottom: 250px;
+                right: 20px;
+                left: auto;
+            }
+            .resource-item a {
+                width: 100%;
+                justify-content: center;
+            }
+            .resource-item h3 {
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 5px;
+            }
+            .grouped-icons {
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 5px;
+            }
+            .grouped-icons .icon-circle {
+                margin-right: 0;
+            }
+        }
     </style>
 </head>
 
@@ -862,7 +955,7 @@
         </div>
     </main>
     <div class="chat-call-to-action" title="Mensaje para iniciar el chat con el asistente">
-        Chatea con el asistente diseñado para acompañarte en este valioso viaje.
+        Hola soy Niko me entrenaron para acompañarte en este valioso viaje!!
     </div>
     <div class="podcast-buttons-container">
         <a class="podcast-button" data-file="podcastia1.m4a" onclick="handlePodcastClick(this)" title="Reproducir Podcast Introductorio">
@@ -876,7 +969,7 @@
     </div>
     
     <div class="cosmic-bubble-container" title="Reproducir el Podcast de NotebookLM para Estudiantes">
-        <div class="cosmic-bubble" data-file="audionotebook.m4a" onclick="handlePodcastClick(this)">
+        <div class="cosmic-bubble" data-file="audionotebook.m4A" onclick="handlePodcastClick(this)">
             <i class="fas fa-play"></i>
         </div>
     </div>
@@ -898,7 +991,6 @@
             if (currentAudio && currentButton !== button) {
                 currentAudio.pause();
                 currentAudio.currentTime = 0;
-                // Maneja el caso especial del ícono del botón de la burbuja
                 if (currentButton.classList.contains('cosmic-bubble')) {
                     currentButton.querySelector('i').className = 'fas fa-play';
                 } else {

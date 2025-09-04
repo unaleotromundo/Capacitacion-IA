@@ -1,0 +1,718 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Tu Viaje</title>
+  <link href="https://fonts.googleapis.com/css2?family=Dancing+Script&display=swap" rel="stylesheet">
+  <style>
+    body {
+      font-family: 'Segoe UI', sans-serif;
+      background-color: #f8f9fa;
+      color: #2c3e50;
+      line-height: 1.7;
+      margin: 0;
+      padding: 20px;
+      transition: background-color 0.3s, color 0.3s;
+    }
+    .dark-mode {
+      background-color: #1a1a1a;
+      color: #ecf0f1;
+    }
+    .dark-mode .container {
+      background: #2d3436;
+      box-shadow: 0 6px 20px rgba(0,0,0,0.3);
+    }
+    .dark-mode h1, .dark-mode h2, .dark-mode h3 {
+      color: #00bfff;
+    }
+    .dark-mode h3 {
+      color: #55efc4;
+    }
+    .dark-mode .comment-box {
+      background: #404040;
+    }
+    .dark-mode textarea {
+      background: #343434;
+      color: #ecf0f1;
+      border-color: #666;
+    }
+    .dark-mode .prompt {
+      background: #343434;
+      border-color: #555;
+      color: #ecf0f1;
+    }
+    .dark-mode .copy-btn {
+      background: #666;
+    }
+    .container {
+      max-width: 900px;
+      margin: auto;
+      background: white;
+      padding: 30px;
+      border-radius: 14px;
+      box-shadow: 0 6px 20px rgba(0,0,0,0.1);
+    }
+    h1 {
+      text-align: center;
+      font-size: 2.2em;
+      color: #2980b9;
+    }
+    h2 {
+      border-bottom: 2px solid #ecf0f1;
+      padding-bottom: 8px;
+      margin-top: 30px;
+      color: #2980b9;
+    }
+    h3 {
+      color: #16a085;
+      font-size: 1.2em;
+    }
+    .modulo {
+      display: none;
+    }
+    .activo {
+      display: block;
+      animation: fadeIn 0.6s ease-in;
+    }
+    @keyframes fadeIn {
+      from { opacity: 0; } to { opacity: 1; }
+    }
+    .comment-box {
+      margin: 25px 0;
+      padding: 15px;
+      background: #f1f9ff;
+      border-radius: 8px;
+    }
+    .comment-box label {
+      display: block;
+      margin-bottom: 8px;
+      font-weight: 500;
+    }
+    textarea {
+      width: 100%;
+      padding: 12px;
+      border: 1px solid #bdc3c7;
+      border-radius: 6px;
+      font-family: inherit;
+      resize: vertical;
+      height: 100px;
+      background: white;
+      color: #2c3e50;
+    }
+    .btn {
+      display: inline-block;
+      margin-top: 15px;
+      padding: 12px 24px;
+      background: #e67e22;
+      color: white;
+      font-weight: bold;
+      border: none;
+      border-radius: 6px;
+      cursor: pointer;
+    }
+    .btn:hover {
+      background: #d35400;
+    }
+    .prompt {
+      position: relative;
+      background: #f8f9fa;
+      border: 1px solid #ddd;
+      border-left: 4px solid #3498db;
+      padding: 15px;
+      margin: 15px 0;
+      font-family: 'Courier New', monospace;
+      font-size: 0.95em;
+      overflow-x: auto;
+      border-radius: 4px;
+    }
+    .copy-btn {
+      position: absolute;
+      top: 8px;
+      right: 8px;
+      background: #95a5a6;
+      color: white;
+      border: none;
+      border-radius: 4px;
+      padding: 4px 8px;
+      font-size: 0.8em;
+      cursor: pointer;
+    }
+    .copy-btn:hover {
+      background: #7f8c8d;
+    }
+    .feedback {
+      color: #27ae60;
+      font-weight: bold;
+      margin: 10px 0;
+      display: none;
+    }
+    .nav-buttons {
+      text-align: center;
+      margin: 30px 0;
+    }
+    .btn-prev {
+      background: #95a5a6;
+    }
+    .btn-prev:hover {
+      background: #7f8c8d;
+    }
+    .progress-bar {
+      width: 100%;
+      height: 6px;
+      background: #ecf0f1;
+      border-radius: 3px;
+      margin: 20px 0;
+      overflow: hidden;
+    }
+    .progress {
+      height: 100%;
+      width: 0%;
+      background: #27ae60;
+      transition: width 0.4s;
+    }
+    .certificado {
+      text-align: center;
+      padding: 30px;
+      background: #fff9e6;
+      border: 1px dashed #f1c40f;
+      border-radius: 14px;
+      margin: 30px 0;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+    }
+    .certificado h3 {
+      font-size: 1.8em;
+      color: #1a1a1a;
+      margin-bottom: 10px;
+    }
+    .certificado p {
+      color: #1a1a1a;
+      font-size: 1.1em;
+      line-height: 1.7;
+      margin: 10px 0;
+    }
+    .nombre-diploma {
+      font-family: 'Dancing Script', 'Brush Script MT', cursive;
+      font-size: 2.7em;
+      color: #c0392b;
+      font-weight: bold;
+      margin: 15px 0 10px;
+      text-shadow: 2px 2px 3px rgba(0,0,0,0.1);
+      letter-spacing: 1px;
+    }
+    .fecha-diploma {
+      font-style: italic;
+      color: #1a1a1a;
+      font-size: 1.1em;
+      margin-top: 15px;
+    }
+    footer {
+      text-align: center;
+      margin-top: 50px;
+      color: #7f8c8d;
+      font-size: 0.9em;
+    }
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin: 20px 0;
+    }
+    th, td {
+      border: 1px solid #bdc3c7;
+      padding: 10px;
+      text-align: left;
+    }
+    th {
+      background: #ecf0f1;
+    }
+    .theme-toggle {
+      position: fixed;
+      top: 20px;
+      right: 20px;
+      width: 50px;
+      height: 50px;
+      background: #2980b9;
+      color: white;
+      border: none;
+      border-radius: 50%;
+      font-size: 1.2em;
+      cursor: pointer;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+      z-index: 100;
+    }
+    .theme-toggle.dark {
+      background: #27ae60;
+    }
+
+    /* === MODAL GLOSARIO === */
+    .modal {
+      display: none;
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(0,0,0,0.7);
+      backdrop-filter: blur(8px);
+      z-index: 1000;
+      justify-content: center;
+      align-items: center;
+      animation: fadeIn 0.4s;
+    }
+    .modal-content {
+      background: white;
+      width: 90%;
+      max-width: 800px;
+      max-height: 90vh;
+      border-radius: 16px;
+      overflow: auto;
+      box-shadow: 0 10px 40px rgba(0,0,0,0.3);
+      padding: 30px;
+      position: relative;
+    }
+    .modal-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 20px;
+      border-bottom: 2px solid #ecf0f1;
+      padding-bottom: 10px;
+    }
+    .modal-header h2 {
+      margin: 0;
+      color: #2980b9;
+    }
+    .close-modal {
+      background: #e74c3c;
+      color: white;
+      border: none;
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      font-size: 1.2em;
+      cursor: pointer;
+      transition: background 0.3s;
+    }
+    .close-modal:hover {
+      background: #c0392b;
+    }
+    .glossary-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 16px;
+    }
+    .glossary-term {
+      background: #f8f9fa;
+      padding: 16px;
+      border-radius: 10px;
+      border-left: 5px solid #3498db;
+      transition: transform 0.2s;
+    }
+    .glossary-term:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 6px 12px rgba(0,0,0,0.1);
+    }
+    .glossary-term h4 {
+      margin: 0 0 8px 0;
+      color: #2980b9;
+      font-size: 1.1em;
+    }
+    .glossary-term p {
+      margin: 0;
+      color: #555;
+      font-size: 0.95em;
+    }
+    @keyframes fadeIn {
+      from { opacity: 0; } to { opacity: 1; }
+    }
+  </style>
+</head>
+<body>
+  <button id="theme-toggle" class="theme-toggle">☀️</button>
+
+  <div class="container">
+    <h1>Tu Viaje</h1>
+    <p><em>Tu viaje para convertirte en un educador potenciado por IA</em></p>
+
+    <div class="progress-bar">
+      <div id="progress" class="progress"></div>
+    </div>
+
+    <!-- Módulo 0 -->
+    <div id="modulo0" class="modulo activo">
+      <h2>📘 Bienvenida</h2>
+      <p>¡Bienvenida, bienvenido! En el corazón de cada educador reside una pasión por encender la curiosidad y guiar el aprendizaje. Sin embargo, las realidades del día a día —la planificación interminable, la carga administrativa y la necesidad de atender a una diversidad de estudiantes— pueden opacar esa llama.</p>
+      <p>Este curso ha sido diseñado pensando en ti. Te presentamos la <strong>Inteligencia Artificial (IA)</strong> no como una tecnología compleja más que aprender, sino como tu nuevo compañero de cátedra: un asistente incansable, un colaborador creativo y una herramienta poderosa para aligerar tu carga y reavivar tu pasión por la enseñanza.</p>
+      <p>A lo largo de este viaje, transformarás tu manera de trabajar. Descubrirás cómo ahorrar horas en tareas administrativas, cómo personalizar el aprendizaje para que cada estudiante pueda brillar y cómo generar ideas frescas y creativas para tus clases.</p>
+      <p><strong>Y lo más importante:</strong> no necesitas ninguna experiencia previa. No hay que saber de codificación ni ser un experto en tecnología para dominar esta habilidad. Solo necesitas curiosidad y el deseo de explorar nuevas fronteras.</p>
+      <p>Nuestro compromiso es ofrecerte una experiencia de aprendizaje que sea no solo útil, sino también hermosa, sencilla y profundamente disfrutable. Cada lección está diseñada con un lenguaje claro, apoyada por elementos visuales limpios y actividades prácticas que te darán confianza desde el primer momento. Al finalizar, no solo sabrás cómo usar la IA, sino que te sentirás como un verdadero experto en la creación de <em>prompts</em>, listo para liderar la transformación educativa en tu propia aula.</p>
+
+      <div class="comment-box">
+        <label for="nombre-usuario">¿Cuál es tu nombre? (para tu certificado)</label>
+        <input type="text" id="nombre-usuario" placeholder="Tu nombre aquí" style="width:100%;padding:10px;margin:10px 0;border:1px solid #bdc3c7;border-radius:6px">
+
+        <label for="comentario0">¿Qué esperas de este viaje?</label>
+        <textarea id="comentario0" placeholder="Escribe aquí tu reflexión..."></textarea>
+        <div id="feedback0" class="feedback">¡Gracias! Tu viaje comienza ahora.</div>
+        <button class="btn" onclick="guardarYContinuar(0,1)">Continuar →</button>
+      </div>
+    </div>
+
+    <!-- Módulo 1 -->
+    <div id="modulo1" class="modulo">
+      <h2>🌱 Módulo 1: Descubre tu nuevo compañero: la IA</h2>
+      <h3>Lección 1.1: ¿Qué es la Inteligencia Artificial Generativa? (Explicado con Manzanas)</h3>
+      <p>La Inteligencia Artificial Generativa es una categoría especial de IA que, en lugar de solo procesar datos o seguir instrucciones rígidas, tiene la capacidad de crear contenido completamente nuevo y original. Puede generar textos, componer música, diseñar imágenes y hasta proponer ideas innovadoras. Es fundamental entender que no funciona como un motor de búsqueda tipo Google, que encuentra información que ya existe en internet. La IA Generativa es una creadora; utiliza su vasto conocimiento para construir respuestas nuevas, palabra por palabra, basándose en los patrones que ha aprendido.</p>
+      <p>La mejor manera de entenderlo es a través de una analogía muy familiar para cualquier educador: un niño aprendiendo a hablar. Imagina un niño pequeño que escucha miles de conversaciones y cuentos. Al principio, solo repite palabras, pero con el tiempo, su cerebro empieza a reconocer patrones: la gramática, el contexto, cómo las palabras se conectan para formar ideas. Eventualmente, el niño no solo repite frases que ha oído, sino que empieza a crear las suyas propias, oraciones nuevas y coherentes para expresar sus pensamientos.</p>
+      <p>La IA Generativa funciona de manera muy similar. Ha sido «entrenada» con una cantidad inimaginable de texto e información de internet, el equivalente a lo que un humano tardaría miles de años en leer. A partir de esta exposición masiva, aprende los patrones del lenguaje y, cuando le haces una pregunta, no busca una respuesta preexistente. En cambio, predice cuál es la siguiente palabra más lógica para formar una oración coherente y relevante, y luego la siguiente, y la siguiente, construyendo una respuesta original en tiempo real.</p>
+      <div class="prompt">
+        ¿Puedes explicarme qué es la fotosíntesis como si yo tuviera 10 años y me encantara el béisbol?
+        <button class="copy-btn" onclick="copiarPrompt(this)">Copiar</button>
+      </div>
+      <p>Observa cómo la IA no solo simplifica el concepto, sino que utiliza analogías relacionadas con el béisbol para hacerlo más cercano y comprensible. Esta es la esencia de tu nuevo asistente.</p>
+
+      <h3>Lección 1.2: El "Superpoder" de la IA en tu Aula: ¿Por Qué Debería Importarme?</h3>
+      <ul>
+        <li><strong>Ahorro de Tiempo:</strong> automatiza correos, borradores, calificaciones.</li>
+        <li><strong>Personalización masiva:</strong> adapta recursos para cada nivel de estudiante.</li>
+        <li><strong>Fomento de la creatividad:</strong> diseña actividades innovadoras.</li>
+        <li><strong>Creación de contenido ilimitada:</strong> hojas de trabajo, rúbricas, planes.</li>
+      </ul>
+
+      <h3>Lección 1.3: Conociendo a tus Asistentes</h3>
+      <p>Las herramientas más populares:</p>
+      <ul>
+        <li><strong>ChatGPT</strong> (OpenAI) – versátil, ideal para principiantes.</li>
+        <li><strong>Gemini</strong> (Google) – conectado a internet, información actualizada.</li>
+        <li><strong>Claude</strong> (Anthropic) – excelente para textos largos y razonamiento.</li>
+      </ul>
+
+      <div class="comment-box">
+        <label for="comentario1">¿Qué te sorprendió de la analogía del niño?</label>
+        <textarea id="comentario1" placeholder="Comparte tu reflexión..."></textarea>
+        <div id="feedback1" class="feedback">¡Muy bien! Estás entendiendo cómo piensa tu nuevo asistente.</div>
+        <div class="nav-buttons">
+          <button class="btn btn-prev" onclick="irAModulo(1,0)">← Volver</button>
+          <button class="btn" onclick="guardarYContinuar(1,2)">Continuar →</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Módulo 2 -->
+    <div id="modulo2" class="modulo">
+      <h2>🔑 Módulo 2: La fórmula mágica del prompting</h2>
+      <h3>Lección 2.1: ¿Qué es un "Prompt"? La Semilla de la Creación</h3>
+      <p>Un <strong>prompt</strong> es la instrucción que le das a la IA. Es la <strong>semilla</strong> que siembras.</p>
+      <p>Si dices: <em>"Escribe una historia"</em>, obtendrás algo genérico.</p>
+      <p>Pero si dices: <em>"Escribe una historia de misterio para niños de 10 años en un museo por la noche"</em>, obtendrás algo mágico.</p>
+
+      <h3>Lección 2.2: La Fórmula R-C-T-F-E-T</h3>
+      <ul>
+        <li><strong>R – Rol:</strong> "Actúa como un profesor de historia experto..."</li>
+        <li><strong>C – Contexto:</strong> "Estoy con estudiantes de 5º grado..."</li>
+        <li><strong>T – Tarea:</strong> "Genera 5 problemas sobre fracciones..."</li>
+        <li><strong>F – Formato:</strong> "En lista numerada, con tabla de respuestas..."</li>
+        <li><strong>E – Ejemplos:</strong> "Un buen objetivo es: 'Los estudiantes podrán nombrar los planetas...'"</li>
+        <li><strong>T – Tono:</strong> "Usa un tono alentador y amigable..."</li>
+      </ul>
+
+      <h3>Lección 2.3: ¡A Practicar!</h3>
+      <p><strong>Escenario:</strong> Necesitas una actividad de 5 minutos sobre el ciclo del agua para 3er grado.</p>
+      <div class="prompt">
+        Actúa como un profesor de ciencias de primaria experto en hacer que el aprendizaje sea divertido. Estoy preparando mi próxima clase para estudiantes de 3er grado (8-9 años). Necesito una actividad de "gancho" de no más de 5 minutos para despertar su curiosidad sobre el ciclo del agua antes de empezar la lección principal. Genera una idea para una actividad de introducción o un experimento muy simple y visual. Describe la actividad en 3 pasos sencillos que pueda seguir en el aula. Lista los materiales necesarios (deben ser cosas comunes como agua, un vaso o una bolsa de plástico). Escribe con un lenguaje entusiasta y muy fácil de entender para niños.
+        <button class="copy-btn" onclick="copiarPrompt(this)">Copiar</button>
+      </div>
+
+      <div class="comment-box">
+        <label for="comentario2">¿Cómo podrías usar esta fórmula en tu clase esta semana?</label>
+        <textarea id="comentario2" placeholder="Tu reflexión..."></textarea>
+        <div id="feedback2" class="feedback">¡Excelente! Ya estás pensando como un experto en IA.</div>
+        <div class="nav-buttons">
+          <button class="btn btn-prev" onclick="irAModulo(2,1)">← Volver</button>
+          <button class="btn" onclick="guardarYContinuar(2,3)">Continuar →</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Módulo 3 -->
+    <div id="modulo3" class="modulo">
+      <h2>🛠️ Módulo 3: Tu fábrica de recursos educativos</h2>
+      <h3>Plan de Lección (Modelo 5E)</h3>
+      <div class="prompt">
+        Actúa como un diseñador curricular experto. Crea un plan de lección detallado para mi clase de [Asignatura] de [Grado] sobre [Tema]. Usa el modelo 5E (Enganchar, Explorar, Explicar, Elaborar, Evaluar). Incluye objetivos, actividades, diferenciación y evaluación formativa.
+        <button class="copy-btn" onclick="copiarPrompt(this)">Copiar</button>
+      </div>
+
+      <h3>Hojas de Trabajo</h3>
+      <div class="prompt">
+        Crea una hoja de trabajo para mi clase de [Asignatura] de [Grado] sobre [Tema]. Incluye: [Número] ejercicios, [Número] preguntas, [Número] pregunta de aplicación. Al final, añade hoja de respuestas.
+        <button class="copy-btn" onclick="copiarPrompt(this)">Copiar</button>
+      </div>
+
+      <div class="comment-box">
+        <label for="comentario3">¿Qué tipo de recurso crearás primero con IA?</label>
+        <textarea id="comentario3" placeholder="Tu idea..."></textarea>
+        <div id="feedback3" class="feedback">¡Perfecto! Estás listo para crear.</div>
+        <div class="nav-buttons">
+          <button class="btn btn-prev" onclick="irAModulo(3,2)">← Volver</button>
+          <button class="btn" onclick="guardarYContinuar(3,4)">Continuar →</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Módulo 4 -->
+    <div id="modulo4" class="modulo">
+      <h2>⚡ Módulo 4: Domina el arte avanzado</h2>
+      <h3>Lección 4.1: El Poder de la Iteración</h3>
+      <p>No aceptes la primera respuesta. Conversa con la IA:</p>
+      <ul>
+        <li>"Hazlo más corto."</li>
+        <li>"Ahora en tono formal."</li>
+        <li>"Añade un ejemplo del mundo real."</li>
+      </ul>
+
+      <h3>Lección 4.2: Pensamiento Paso a Paso (Chain-of-Thought)</h3>
+      <p>Agrega al final del prompt:</p>
+      <div class="prompt">
+        Pensemos paso a paso.
+        <button class="copy-btn" onclick="copiarPrompt(this)">Copiar</button>
+      </div>
+
+      <h3>Lección 4.3: Crea tus Propias Plantillas</h3>
+      <p>Usa corchetes [ ] para marcar partes variables:</p>
+      <div class="prompt">
+        Actúa como un experto en pensamiento crítico. Crea [número] preguntas de debate para [grado] sobre [tema]. Conecta con [asunto actual].
+        <button class="copy-btn" onclick="copiarPrompt(this)">Copiar</button>
+      </div>
+
+      <div class="comment-box">
+        <label for="comentario4">¿Qué plantilla personal crearás para tu trabajo diario?</label>
+        <textarea id="comentario4" placeholder="Tu idea..."></textarea>
+        <div id="feedback4" class="feedback">¡Increíble! Estás creando tus propias herramientas.</div>
+        <div class="nav-buttons">
+          <button class="btn btn-prev" onclick="irAModulo(4,3)">← Volver</button>
+          <button class="btn" onclick="guardarYContinuar(4,5)">Continuar →</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Módulo 5 -->
+    <div id="modulo5" class="modulo">
+      <h2>🛡️ Módulo 5: Ética, privacidad e integridad académica</h2>
+      <h3>Lección 5.1: Protege la privacidad</h3>
+      <p><strong>Nunca</strong> ingreses nombres de estudiantes, trabajos completos o datos sensibles.</p>
+      <p>Usa descripciones genéricas:</p>
+      <div class="prompt">
+        Diseña un plan de apoyo para un estudiante de 4° grado con dificultades en lectura.
+        <button class="copy-btn" onclick="copiarPrompt(this)">Copiar</button>
+      </div>
+
+      <h3>Lección 5.2: Identifica el sesgo</h3>
+      <p>La IA puede repetir estereotipos. Siempre sé el <strong>editor crítico</strong>. Pregúntate:</p>
+      <ul>
+        <li>¿Representa diversas perspectivas?</li>
+        <li>¿Podría reforzar algún estereotipo?</li>
+      </ul>
+
+      <h3>Lección 5.3: Integridad académica</h3>
+      <p>En lugar de prohibir la IA, enséñales a usarla bien.</p>
+      <p>Diseña tareas "a prueba de IA":</p>
+      <ul>
+        <li><strong>Evita:</strong> "Escribe un ensayo sobre la Guerra Mundial."</li>
+        <li><strong>Prueba:</strong> "Escribe una carta desde las trincheras en 1916, mencionando dos causas de la guerra."</li>
+      </ul>
+
+      <div class="comment-box">
+        <label for="comentario5">¿Cómo enseñarás a tus estudiantes a usar la IA con ética?</label>
+        <textarea id="comentario5" placeholder="Tu reflexión final..."></textarea>
+        <div id="feedback5" class="feedback">¡Tu reflexión es poderosa! Gracias por completar el viaje.</div>
+        <div class="nav-buttons">
+          <button class="btn btn-prev" onclick="irAModulo(5,4)">← Volver</button>
+          <button class="btn" onclick="guardarYContinuar(5,'final')">Ver certificado →</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Pantalla final -->
+    <div id="final" class="modulo">
+      <h2>🏆 ¡Felicitaciones!</h2>
+      <p>Has completado <strong>Tu Viaje para Convertirte en un Educador Potenciado por IA</strong>.</p>
+      <p>Ya no eres un espectador de esta tecnología, sino un participante activo, capacitado y ético.</p>
+
+      <div class="certificado">
+        <h3>Certificado de Finalización</h3>
+        <p>Se otorga a</p>
+        <div id="nombre-diploma" class="nombre-diploma">[Tu Nombre]</div>
+        <p>por completar con excelencia el curso <em>Tu Viaje</em> y demostrar dominio en el uso ético y efectivo de la IA en la educación.</p>
+        <p class="fecha-diploma" id="fecha-diploma">2025</p>
+      </div>
+
+      <button class="btn" onclick="descargarBiblioteca()">📄 Biblioteca Rápida de Prompts (PDF)</button>
+      <button class="btn" onclick="abrirGlosario()">📚 Glosario Visual de Términos</button>
+
+      <footer>
+        <p>© 2025 Tu Viaje | Un curso hermoso, sencillo y profundamente disfrutable</p>
+      </footer>
+    </div>
+  </div>
+
+  <!-- Modal Glosario -->
+  <div id="modal-glosario" class="modal">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h2>📚 Glosario Visual de Términos</h2>
+        <button class="close-modal" onclick="cerrarGlosario()">✕</button>
+      </div>
+      <div class="glossary-grid">
+        <div class="glossary-term">
+          <h4>Inteligencia Artificial (IA) Generativa</h4>
+          <p>Un tipo de IA que puede crear contenido nuevo (texto, imágenes, etc.) en lugar de solo analizar datos existentes.</p>
+        </div>
+        <div class="glossary-term">
+          <h4>LLM (Gran Modelo de Lenguaje)</h4>
+          <p>El «cerebro» detrás de herramientas como ChatGPT. Es un modelo entrenado con enormes cantidades de texto para entender y generar lenguaje humano.</p>
+        </div>
+        <div class="glossary-term">
+          <h4>Prompt</h4>
+          <p>La instrucción, pregunta o texto que le das a la IA para que realice una tarea.</p>
+        </div>
+        <div class="glossary-term">
+          <h4>Alucinación</h4>
+          <p>Cuando la IA genera información que es incorrecta o inventada, pero la presenta con total confianza. Siempre verifica los datos importantes.</p>
+        </div>
+        <div class="glossary-term">
+          <h4>Sesgo (Bias)</h4>
+          <p>Una tendencia en los resultados de la IA a favorecer ciertas perspectivas o generar resultados injustos, debido a los datos con los que fue entrenada.</p>
+        </div>
+        <div class="glossary-term">
+          <h4>Iteración</h4>
+          <p>El proceso de refinar la respuesta de la IA a través de una conversación con múltiples prompts de seguimiento.</p>
+        </div>
+        <div class="glossary-term">
+          <h4>Chain-of-Thought (Cadena de Pensamiento)</h4>
+          <p>Técnica que consiste en pedir a la IA que explique su razonamiento «paso a paso» para mejorar la precisión en tareas complejas.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    const themeToggle = document.getElementById('theme-toggle');
+    const body = document.body;
+    const modal = document.getElementById('modal-glosario');
+
+    const savedTheme = localStorage.getItem('tuViajeTheme');
+    if (savedTheme === 'dark') {
+      body.classList.add('dark-mode');
+      themeToggle.textContent = '🌙';
+      themeToggle.classList.add('dark');
+    }
+
+    themeToggle.addEventListener('click', () => {
+      if (body.classList.contains('dark-mode')) {
+        body.classList.remove('dark-mode');
+        themeToggle.textContent = '☀️';
+        themeToggle.classList.remove('dark');
+        localStorage.setItem('tuViajeTheme', 'light');
+      } else {
+        body.classList.add('dark-mode');
+        themeToggle.textContent = '🌙';
+        themeToggle.classList.add('dark');
+        localStorage.setItem('tuViajeTheme', 'dark');
+      }
+    });
+
+    function copiarPrompt(btn) {
+      const text = btn.parentElement.textContent.replace('Copiar', '').trim();
+      navigator.clipboard.writeText(text).then(() => {
+        btn.textContent = '¡Listo!';
+        btn.style.background = '#27ae60';
+        setTimeout(() => {
+          btn.textContent = 'Copiar';
+          btn.style.background = '';
+        }, 1500);
+      });
+    }
+
+    let progreso = JSON.parse(localStorage.getItem('tuViajeProgreso')) || { modulo: 0, comentarios: {}, nombre: '' };
+    Object.keys(progreso.comentarios).forEach(k => {
+      const el = document.getElementById(k);
+      if (el) el.value = progreso.comentarios[k];
+    });
+    if (progreso.nombre) document.getElementById('nombre-usuario').value = progreso.nombre;
+
+    function mostrarModulo(id) {
+      document.querySelectorAll('.modulo').forEach(m => m.classList.remove('activo'));
+      document.getElementById(id === 'final' ? 'final' : `modulo${id}`).classList.add('activo');
+      if (id === 'final') {
+        document.getElementById('nombre-diploma').textContent = progreso.nombre || 'Educador';
+        document.getElementById('fecha-diploma').textContent = new Date().toLocaleDateString('es-ES', { year: 'numeric', month: 'long', day: 'numeric' });
+      }
+      document.getElementById('progress').style.width = ((progreso.modulo / 5) * 100) + '%';
+    }
+
+    function guardarYContinuar(actual, siguiente) {
+      const textarea = document.getElementById(`comentario${actual}`);
+      const nombreInput = document.getElementById('nombre-usuario');
+      const nombre = nombreInput ? nombreInput.value.trim() : '';
+      const comentario = textarea ? textarea.value.trim() : '';
+
+      if (actual === 0 && !nombre) {
+        alert('Por favor, escribe tu nombre.');
+        return;
+      }
+      if (textarea && !comentario) {
+        alert('Por favor, escribe un comentario.');
+        return;
+      }
+
+      progreso.nombre = nombre;
+      if (textarea) progreso.comentarios[`comentario${actual}`] = comentario;
+      progreso.modulo = siguiente === 'final' ? 5 : siguiente;
+      localStorage.setItem('tuViajeProgreso', JSON.stringify(progreso));
+
+      document.getElementById(`feedback${actual}`).style.display = 'block';
+      setTimeout(() => mostrarModulo(siguiente), 600);
+    }
+
+    function irAModulo(actual, anterior) {
+      const comentario = document.getElementById(`comentario${actual}`)?.value.trim();
+      if (comentario) progreso.comentarios[`comentario${actual}`] = comentario;
+      localStorage.setItem('tuViajeProgreso', JSON.stringify(progreso));
+      mostrarModulo(anterior);
+    }
+
+    function descargarBiblioteca() {
+      const url = 'BibliotecaRapidaPromptsEducadores.pdf';
+      const link = document.createElement('a');
+      link.href = url;
+      link.download = 'Biblioteca_Rápida_Prompts_Educadores.pdf';
+
+      fetch(url)
+        .then(response => {
+          if (response.ok) return response.blob();
+          throw new Error('Archivo no encontrado');
+        })
+        .then(blob => {
+          const blobUrl = URL.createObjectURL(blob);
+          link.href = blobUrl;
+          link.click();
+          URL.revokeObjectURL(blobUrl);
+        })
+        .catch(err => {
+          alert('Error al descargar: ' + err.message + '\n\nAsegúrate de que el archivo "BibliotecaRapidaPromptsEducadores.pdf" esté en la misma carpeta que este archivo HTML.');
+        });
+    }
+
+    function abrirGlosario() {
+      modal.style.display = 'flex';
+    }
+
+    function cerrarGlosario() {
+      modal.style.display = 'none';
+    }
+
+    window.onload = () => mostrarModulo(progreso.modulo);
+  </script>
+</body>
+</html>

@@ -1,0 +1,925 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Capacitación en IA con herramientas esenciales para docentes.">
+    <title>Capacitación IA - Tu Asistente Educativo Inteligente</title>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@700;600&family=Roboto:wght@400;500&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <script src="https://cdn.botpress.cloud/webchat/v3.2/inject.js"></script>
+    <script src="https://files.bpcontent.cloud/2025/08/28/18/20250828181855-SDCU21ES.js" defer></script>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Roboto', sans-serif;
+            background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url('image.png') no-repeat center/cover fixed;
+            color: #333;
+            min-height: 100vh;
+            text-align: center;
+            overflow-x: hidden;
+        }
+
+        .background-pattern {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image: radial-gradient(circle at 10% 20%, rgba(255, 255, 255, 0.1) 0%, transparent 5%), radial-gradient(circle at 90% 80%, rgba(255, 255, 255, 0.1) 0%, transparent 5%), radial-gradient(circle at 50% 50%, rgba(255, 255, 255, 0.05) 0%, transparent 10%);
+            z-index: -1;
+            pointer-events: none;
+        }
+
+        header {
+            background: rgba(0, 51, 102, 0.95);
+            color: white;
+            padding: 30px 0;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+            position: relative;
+            overflow: hidden;
+        }
+
+        header::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" preserveAspectRatio="none"><path d="M0,0 L100,0 L100,100 Z" fill="rgba(255,255,255,0.1)"/></svg>');
+            background-size: 100% 100%;
+            z-index: -1;
+        }
+
+        .header-content {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+        }
+
+        header h1 {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 3.5rem;
+            font-weight: 700;
+            letter-spacing: 3px;
+            text-transform: uppercase;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+            animation: fadeInDown 1s ease;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 20px;
+        }
+
+        /* Estilos para el logo del microchip con texto */
+        .logo-container {
+            position: relative;
+            width: 50px;
+            height: 50px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .logo-microchip-icon {
+            font-size: 3.5rem; /* Tamaño grande para el ícono del chip */
+            color: #ffcc00;
+            animation: spin-and-pulse 3s linear infinite;
+        }
+
+        .logo-microchip-text {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 0.8rem;
+            font-weight: 900;
+            color: #003366;
+            position: absolute;
+            transform: translate(-50%, -50%);
+            top: 50%;
+            left: 50%;
+        }
+
+        header p {
+            font-size: 1.2rem;
+            opacity: 0.9;
+            max-width: 800px;
+            margin: 0 auto;
+            animation: fadeInUp 1s ease;
+        }
+
+        main {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 40px 20px;
+            max-width: 1200px;
+            margin: 0 auto;
+            z-index: 1;
+        }
+
+        .container {
+            display: flex;
+            flex-direction: column;
+            gap: 40px;
+            width: 100%;
+        }
+
+        @media (min-width: 900px) {
+            .container {
+                flex-direction: row;
+                align-items: flex-start;
+            }
+        }
+
+        .resources-container {
+            flex: 1;
+            min-width: 350px;
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            border-radius: 15px;
+            padding: 30px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
+            text-align: left;
+            transition: all 0.3s ease;
+        }
+
+        .resources-container:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.2);
+        }
+
+        .resources-container h2 {
+            font-family: 'Montserrat', sans-serif;
+            color: #003366;
+            font-size: 2rem;
+            margin-bottom: 20px;
+            text-align: center;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+        }
+
+        .resources-container h2 i {
+            color: #1a73e8;
+        }
+
+        .resource-item {
+            margin-bottom: 25px;
+            padding: 15px;
+            border-radius: 10px;
+            background: rgba(0, 51, 102, 0.05);
+            transition: all 0.3s ease;
+            border-left: 4px solid #003366;
+            opacity: 0;
+            transform: translateY(20px);
+        }
+
+        .resource-item.fade-in {
+            opacity: 1;
+            transform: translateY(0);
+            transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+        }
+
+        .resource-item:hover {
+            background: rgba(0, 51, 102, 0.15);
+            transform: translateX(5px);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+        }
+
+        .resource-item h3 {
+            color: #003366;
+            margin-bottom: 8px;
+            font-size: 1.2rem;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .resource-item h3 i {
+            font-size: 1.1em;
+            transition: transform 0.3s ease;
+        }
+
+        .resource-item:hover h3 i {
+            transform: scale(1.2);
+            color: #1a73e8;
+        }
+
+        .resource-item a {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            padding: 10px 20px;
+            background-color: #003366;
+            color: white;
+            text-decoration: none;
+            font-weight: 500;
+            border-radius: 5px;
+            margin-top: 10px;
+            transition: background-color 0.3s ease, transform 0.3s ease;
+        }
+
+        .resource-item a:hover {
+            background-color: #1a73e8;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+        }
+
+        .resource-item p {
+            color: #666;
+            font-size: 0.95rem;
+            line-height: 1.5;
+            margin-top: 8px;
+        }
+
+        .chat-container {
+            flex: 1;
+            min-width: 350px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .tag {
+            display: inline-block;
+            background: #003366;
+            color: white;
+            padding: 3px 8px;
+            border-radius: 12px;
+            font-size: 0.7rem;
+            margin-left: 5px;
+            font-weight: bold;
+        }
+
+        footer {
+            background-color: rgba(248, 249, 250, 0.9);
+            text-align: center;
+            padding: 20px 0;
+            font-size: 0.9rem;
+            color: #666;
+            margin-top: 40px;
+            border-top: 1px solid rgba(0, 0, 0, 0.1);
+        }
+
+        footer a {
+            color: #003366;
+            text-decoration: none;
+            font-weight: 500;
+        }
+
+        footer a:hover {
+            text-decoration: underline;
+        }
+
+        .footer-content {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 10px;
+        }
+
+        @media (max-width: 800px) {
+            header h1 {
+                font-size: 2.5rem;
+            }
+
+            header p {
+                font-size: 1rem;
+                padding: 0 20px;
+            }
+
+            #webchat {
+                width: 100%;
+                height: 400px;
+            }
+
+            .container {
+                flex-direction: column;
+            }
+
+            .resources-container {
+                margin-bottom: 30px;
+            }
+
+            main {
+                padding: 20px 15px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            header h1 {
+                font-size: 2rem;
+                gap: 10px;
+            }
+            .logo-microchip-icon {
+                font-size: 2.5rem;
+            }
+            .logo-microchip-text {
+                font-size: 0.6rem;
+            }
+            header p {
+                font-size: 0.9rem;
+                padding: 0 15px;
+            }
+
+            #webchat {
+                height: 350px;
+            }
+
+            .resources-container {
+                padding: 20px;
+            }
+
+            .resource-item h3 {
+                font-size: 1.1rem;
+            }
+
+            .resource-item p {
+                font-size: 0.9rem;
+            }
+
+            footer {
+                padding: 15px 0;
+            }
+        }
+
+        @keyframes fadeInDown {
+            from {
+                opacity: 0;
+                transform: translateY(-30px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes spin-and-pulse {
+            0% {
+                transform: rotate(0deg) scale(1);
+                filter: drop-shadow(0 0 10px rgba(255, 204, 0, 0.5));
+            }
+            50% {
+                transform: rotate(180deg) scale(1.1);
+                filter: drop-shadow(0 0 20px rgba(255, 204, 0, 0.8));
+            }
+            100% {
+                transform: rotate(360deg) scale(1);
+                filter: drop-shadow(0 0 10px rgba(255, 204, 0, 0.5));
+            }
+        }
+
+        .floating {
+            animation: floating 3s ease-in-out infinite;
+        }
+
+        @keyframes floating {
+            0% {
+                transform: translateY(0px);
+            }
+
+            50% {
+                transform: translateY(-10px);
+            }
+
+            100% {
+                transform: translateY(0px);
+            }
+        }
+
+        /* Estilos para el nuevo cartel de chat */
+        .chat-call-to-action {
+            position: fixed;
+            bottom: 100px;
+            right: 20px;
+            background-color: #003366;
+            color: white;
+            padding: 15px 20px;
+            border-radius: 12px;
+            box-shadow: 0 6px 20px rgba(0, 0, 0, 0.25);
+            font-weight: 500;
+            font-size: 1.05rem;
+            max-width: 280px;
+            text-align: center;
+            line-height: 1.4;
+            z-index: 999;
+            opacity: 0;
+            transform: scale(0.9) translateX(20px);
+            animation: fadeInScaleUp 0.8s forwards ease-out 0.5s,
+                       subtleBounce 2s infinite ease-in-out 1.5s;
+        }
+
+        .chat-call-to-action::after {
+            content: '';
+            position: absolute;
+            bottom: -10px;
+            right: 25px;
+            width: 0;
+            height: 0;
+            border-left: 10px solid transparent;
+            border-right: 10px solid transparent;
+            border-top: 15px solid #003366;
+            transform: rotate(15deg);
+        }
+
+        @keyframes fadeInScaleUp {
+            from {
+                opacity: 0;
+                transform: scale(0.9) translateX(20px);
+            }
+            to {
+                opacity: 1;
+                transform: scale(1) translateX(0);
+            }
+        }
+
+        @keyframes subtleBounce {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-5px); }
+        }
+
+        @media (max-width: 768px) {
+            .chat-call-to-action {
+                bottom: 80px;
+                right: 15px;
+                font-size: 0.95rem;
+                max-width: 240px;
+                padding: 12px 18px;
+            }
+            .chat-call-to-action::after {
+                right: 20px;
+                border-left: 8px solid transparent;
+                border-right: 8px solid transparent;
+                border-top: 12px solid #003366;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .chat-call-to-action {
+                bottom: 60px;
+                right: auto;
+                left: 50%;
+                transform: translateX(-50%);
+                font-size: 0.85rem;
+                max-width: calc(100% - 40px);
+                padding: 10px 15px;
+                animation: fadeInScaleUp 0.8s forwards ease-out 0.5s,
+                           subtleBounceMobile 2s infinite ease-in-out 1.5s;
+            }
+            .chat-call-to-action::after {
+                bottom: -10px;
+                right: 50%;
+                transform: translateX(50%) rotate(0deg);
+                border-top: 15px solid #003366;
+                border-left: 10px solid transparent;
+                border-right: 10px solid transparent;
+            }
+            @keyframes subtleBounceMobile {
+                0%, 100% { transform: translateX(-50%) translateY(0); }
+                50% { transform: translateX(-50%) translateY(-5px); }
+            }
+        }
+
+        .podcast-buttons-container {
+            position: fixed;
+            bottom: 250px;
+            right: 20px;
+            z-index: 999;
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+            align-items: flex-end;
+        }
+
+        .podcast-button {
+            display: flex;
+            flex-direction: row;
+            align-items: center;
+            background: rgba(255, 255, 255, 0.9);
+            border: 2px solid #003366;
+            border-radius: 25px;
+            padding: 8px 15px;
+            cursor: pointer;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+            transition: all 0.3s ease;
+            text-decoration: none;
+        }
+
+        .podcast-button:hover {
+            transform: scale(1.05);
+            background: #ffcc00;
+            border-color: #e6b800;
+        }
+
+        .podcast-button i {
+            font-size: 1.5rem;
+            color: #003366;
+            margin-right: 10px;
+        }
+
+        .podcast-button span {
+            font-weight: bold;
+            color: #003366;
+            font-size: 0.9rem;
+            text-align: center;
+        }
+
+        .podcast-button .loading-icon {
+            font-size: 1.5rem;
+        }
+        
+        @keyframes spin {
+            0% {
+                transform: rotate(0deg);
+            }
+            100% {
+                transform: rotate(360deg);
+            }
+        }
+
+        @media (max-width: 768px) {
+            .podcast-buttons-container {
+                bottom: 180px;
+                right: 10px;
+            }
+
+            .podcast-button {
+                padding: 6px 12px;
+            }
+
+            .podcast-button i {
+                font-size: 1.2rem;
+                margin-right: 8px;
+            }
+
+            .podcast-button span {
+                font-size: 0.8rem;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .podcast-buttons-container {
+                bottom: 150px;
+                right: 10px;
+                flex-direction: row;
+                justify-content: center;
+                gap: 10px;
+                width: 100%;
+                left: 0;
+                padding: 0 10px;
+            }
+
+            .podcast-button {
+                flex-direction: row;
+                gap: 8px;
+                padding: 8px 12px;
+            }
+
+            .podcast-button i {
+                font-size: 1.2rem;
+                margin-right: 5px;
+            }
+        }
+        
+        /* Estilos para la burbuja cósmica con anillo */
+        .cosmic-bubble-container {
+            position: fixed;
+            bottom: 400px;
+            right: 20px;
+            z-index: 1000;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            animation: floating 3s ease-in-out infinite;
+        }
+
+        .cosmic-bubble {
+            width: 80px;
+            height: 80px;
+            background: radial-gradient(circle, #003366 30%, #1a73e8 100%);
+            border-radius: 50%;
+            box-shadow: 0 0 15px rgba(0, 51, 102, 0.7), 0 0 25px rgba(26, 115, 232, 0.5);
+            cursor: pointer;
+            position: relative;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .cosmic-bubble:hover {
+            transform: scale(1.08);
+            box-shadow: 0 0 20px rgba(0, 51, 102, 0.9), 0 0 35px rgba(26, 115, 232, 0.7);
+        }
+        
+        .cosmic-bubble i {
+            color: white;
+            font-size: 2.5rem;
+            z-index: 2;
+        }
+
+        .cosmic-link-ring {
+            position: absolute;
+            width: 100px;
+            height: 100px;
+            border: 3px solid #ffcc00;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            z-index: 1;
+            opacity: 0;
+            animation: pulse-ring 2s infinite ease-out;
+        }
+
+        .cosmic-bubble-container:hover .cosmic-link-ring {
+            opacity: 1;
+            animation-play-state: running;
+        }
+        
+        @keyframes pulse-ring {
+            0% { transform: scale(0.8); opacity: 0; }
+            50% { transform: scale(1.1); opacity: 0.7; }
+            100% { transform: scale(0.8); opacity: 0; }
+        }
+
+        @media (max-width: 768px) {
+            .cosmic-bubble-container {
+                bottom: 250px;
+                right: 15px;
+            }
+            .cosmic-bubble {
+                width: 70px;
+                height: 70px;
+            }
+            .cosmic-bubble i {
+                font-size: 2.2rem;
+            }
+            .cosmic-link-ring {
+                width: 90px;
+                height: 90px;
+            }
+        }
+
+        /* Estilos y animación para la abeja que deambula */
+        .wandering-bee {
+            position: fixed;
+            width: 50px;
+            height: 50px;
+            background: linear-gradient(45deg, #ffcc00, #ff9900);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+            z-index: 998;
+            transition: transform 2s ease-in-out, background 0.5s ease;
+            cursor: pointer;
+        }
+
+        .wandering-bee i {
+            font-size: 2rem;
+            color: #003366;
+            animation: pulse 1.5s infinite ease-in-out;
+        }
+        
+        .wandering-bee:hover {
+            transform: scale(1.1);
+            box-shadow: 0 6px 20px rgba(0, 0, 0, 0.3);
+        }
+
+        @keyframes pulse {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.15); }
+            100% { transform: scale(1); }
+        }
+    </style>
+</head>
+
+<body>
+    <div class="background-pattern"></div>
+    <a href="indexviaje.html" class="wandering-bee">
+        <i class="fas fa-bee"></i>
+    </a>
+
+    <header>
+        <div class="header-content">
+            <h1 class="floating">
+                <span class="logo-container">
+                    <i class="fas fa-microchip logo-microchip-icon"></i>
+                    <span class="logo-microchip-text"></span>
+                </span>
+                Capacitación IA
+            </h1>
+            <p>Transforma tu enseñanza con las herramientas de inteligencia artificial más innovadoras</p>
+        </div>
+    </header>
+
+    <main>
+        <div class="container">
+            <div class="resources-container">
+                <h2><i class="fas fa-book-open"></i> Recursos Digitales</h2>
+
+                <div class="resource-item">
+                    <h3><i class="fas fa-robot"></i> Recursos EduIA LAB (Ceibal) <span class="tag">Uruguay</span></h3>
+                    <a href="https://ceibal.edu.uy/institucional/eduia/eduia-lab/recursos/" target="_blank">Visitar sitio <i class="fas fa-arrow-right"></i></a>
+                    <p>Una colección de publicaciones, proyectos y capacitaciones de Ceibal centradas en la inteligencia artificial para la educación en Uruguay. Incluye materiales como el "Manifiesto IA" y cursos de formación para docentes.</p>
+                </div>
+                <div class="resource-item">
+                    <h3><i class="fas fa-paint-brush"></i> Canva AI <span class="tag">Diseño</span></h3>
+                    <a href="https://www.canva.com/ai/" target="_blank">Visitar sitio <i class="fas fa-arrow-right"></i></a>
+                    <p>La plataforma de diseño gráfico que incorpora inteligencia artificial para crear presentaciones, materiales visuales y actividades interactivas automáticamente. Ideal para hacer que tus clases sean más atractivas.</p>
+                </div>
+                <div class="resource-item">
+                    <h3><i class="fas fa-lightbulb"></i> Google Gemini <span class="tag">Ideas</span></h3>
+                    <a href="https://gemini.google.com/" target="_blank">Visitar sitio <i class="fas fa-arrow-right"></i></a>
+                    <p>Asistente conversacional avanzado para generar ideas, textos educativos, ejercicios y actividades. Perfecto para romper el bloqueo creativo y planificar tus clases con eficiencia.</p>
+                </div>
+                <div class="resource-item">
+                    <h3><i class="fas fa-comments"></i> ChatGPT <span class="tag">Conversación</span></h3>
+                    <a href="https://chatgpt.com/" target="_blank">Visitar sitio <i class="fas fa-arrow-right"></i></a>
+                    <p>El modelo de lenguaje avanzado que te ayuda a crear actividades, corregir textos, responder preguntas de estudiantes y generar contenido educativo de alta calidad. Ideal para tareas de redacción y planificación.</p>
+                </div>
+                <div class="resource-item">
+                    <h3><i class="fas fa-microchip"></i> Teachable Machine <span class="tag">Proyecto</span></h3>
+                    <a href="https://teachablemachine.withgoogle.com/" target="_blank">Visitar sitio <i class="fas fa-arrow-right"></i></a>
+                    <p>Herramienta de Google que permite a tus alumnos crear modelos de IA simples usando imágenes, sonidos o poses. Excelente para proyectos STEM, aprendizaje activo y demostraciones de inteligencia artificial en el aula.</p>
+                </div>
+                <div class="resource-item">
+                    <h3><i class="fas fa-school"></i> MagicSchool AI <span class="tag">Docentes</span></h3>
+                    <a href="https://www.magicschool.ai/" target="_blank">Visitar sitio <i class="fas fa-arrow-right"></i></a>
+                    <p>El asistente de IA para educadores más utilizado en el mundo, diseñado para simplificar tareas docentes, ahorrar tiempo y combatir el agotamiento profesional. Su interfaz intuitiva y prompts guiados hacen que la preparación y planificación sean más rápidas que nunca.</p>
+                </div>
+                <div class="resource-item">
+                    <h3><i class="fas fa-chart-line"></i> Califica</h3>
+                    <a href="https://app.califica.ai/login" target="_blank">Visitar sitio <i class="fas fa-arrow-right"></i></a>
+                    <p>Plataforma para docentes de Latinoamérica que ayuda a generar mapas conceptuales, rúbricas y otros materiales educativos para reducir la carga de trabajo.</p>
+                </div>
+                <div class="resource-item">
+                    <h3><i class="fas fa-image"></i> Leonardo AI <span class="tag">Diseño</span></h3>
+                    <a href="https://leonardo.ai/" target="_blank">Visitar sitio <i class="fas fa-arrow-right"></i></a>
+                    <p>Plataforma de IA generativa para la creación de contenido visual. Permite generar imágenes y vídeos a partir de texto, ideal para crear recursos para tus clases y proyectos artísticos.</p>
+                </div>
+                <div class="resource-item">
+                    <h3><i class="fas fa-microchip"></i> Google AI for Educators <span class="tag">Docentes</span></h3>
+                    <a href="https://grow.google/ai-for-educators/" target="_blank">Visitar sitio <i class="fas fa-arrow-right"></i></a>
+                    <p>Una colección de herramientas de inteligencia artificial de Google diseñadas específicamente para educadores. Incluye recursos, guías y cursos para integrar la IA en el aula y mejorar los procesos de enseñanza.</p>
+                </div>
+                <div class="resource-item">
+                    <h3><i class="fas fa-school"></i> EDTK <span class="tag">Plataforma</span></h3>
+                    <a href="https://edtk.co/" target="_blank">Visitar sitio <i class="fas fa-arrow-right"></i></a>
+                    <p>Plataforma para docentes que utiliza la IA para generar actividades, planificaciones de clase, y evaluaciones de manera rápida y eficiente. Ideal para ahorrar tiempo en la preparación del material didáctico.</p>
+                </div>
+                <div class="resource-item">
+                    <h3><i class="fas fa-gamepad"></i> Kahoot! <span class="tag">Juego</span></h3>
+                    <a href="https://create.kahoot.it/page/make" target="_blank">Visitar sitio <i class="fas fa-arrow-right"></i></a>
+                    <p>La conocida plataforma de aprendizaje basada en juegos ahora incorpora IA para ayudarte a crear cuestionarios y juegos interactivos de forma más rápida. Perfecto para hacer las clases más dinámicas y divertidas.</p>
+                </div>
+                <div class="resource-item">
+                    <h3><i class="fas fa-music"></i> AI Duet <span class="tag">Creatividad</span></h3>
+                    <a href="https://experiments.withgoogle.com/ai/ai-duet/view/" target="_blank">Visitar sitio <i class="fas fa-arrow-right"></i></a>
+                    <p>Un experimento interactivo de Google que te permite tocar el piano con una inteligencia artificial. Tus alumnos pueden aprender de forma lúdica sobre la interacción entre humanos e IA mientras crean música.</p>
+                </div>
+                <div class="resource-item">
+                    <h3><i class="fas fa-pen-nib"></i> Autodraw <span class="tag">Arte</span></h3>
+                    <a href="https://www.autodraw.com/" target="_blank">Visitar sitio <i class="fas fa-arrow-right"></i></a>
+                    <p>Una herramienta de Google que usa aprendizaje automático para adivinar lo que estás dibujando y reemplazarlo con una imagen profesional. Es una forma fácil y divertida de crear iconos y dibujos para presentaciones y materiales.</p>
+                </div>
+            </div>
+            <div class="chat-container">
+                <div id="webchat"></div>
+            </div>
+        </div>
+    </main>
+    <div class="chat-call-to-action">
+        Chatea con el asistente diseñado para acompañarte en este valioso viaje.
+    </div>
+    <div class="podcast-buttons-container">
+        <a class="podcast-button" data-file="podcastia1.m4a" onclick="handlePodcastClick(this)">
+            <i class="fas fa-play-circle"></i>
+            <span>Podcast Introductorio</span>
+        </a>
+        <a class="podcast-button" data-file="podcastia2.m4a" onclick="handlePodcastClick(this)">
+            <i class="fas fa-play-circle"></i>
+            <span>Podcast SecundarIA</span>
+        </a>
+    </div>
+    
+    <div class="cosmic-bubble-container">
+        <div class="cosmic-link-ring" onclick="window.open('https://notebooklm.google.com/', '_blank');"></div>
+        <div class="cosmic-bubble" data-file="audionotebook.m4A" onclick="handlePodcastClick(this)">
+            <i class="fas fa-play"></i>
+        </div>
+    </div>
+    
+    <footer>
+        <div class="footer-content">
+            <p>&copy; 2025 Capacitación IA. Transformando la educación con inteligencia artificial.</p>
+            <p>Explora más sobre IA educativa en <a href="https://x.ai" target="_blank">x.ai</a></p>
+        </div>
+    </footer>
+    <script>
+        let currentAudio = null;
+        let currentButton = null;
+
+        function handlePodcastClick(button) {
+            const file = button.getAttribute('data-file');
+            const icon = button.querySelector('i');
+            if (currentAudio && currentButton === button) {
+                if (currentAudio.paused) {
+                    currentAudio.play();
+                    icon.className = 'fas fa-pause-circle';
+                } else {
+                    currentAudio.pause();
+                    icon.className = 'fas fa-play-circle';
+                }
+            } else {
+                if (currentAudio) {
+                    currentAudio.pause();
+                    currentAudio.currentTime = 0;
+                    if (currentButton) {
+                        currentButton.querySelector('i').className = 'fas fa-play-circle';
+                    }
+                }
+                currentButton = button;
+                icon.className = 'fas fa-spinner fa-spin';
+                currentAudio = new Audio(file);
+                currentAudio.addEventListener('canplaythrough', () => {
+                    icon.className = 'fas fa-pause-circle';
+                    currentAudio.play();
+                }, {
+                    once: true
+                });
+                currentAudio.addEventListener('ended', () => {
+                    icon.className = 'fas fa-play-circle';
+                    currentButton = null;
+                    currentAudio = null;
+                });
+                currentAudio.addEventListener('error', () => {
+                    console.error("Error al cargar el audio:", file);
+                    icon.className = 'fas fa-play-circle';
+                    alert("Hubo un problema al reproducir el audio. Por favor, asegúrate de que el archivo '" + file + "' esté en la misma carpeta.");
+                }, {
+                    once: true
+                });
+            }
+        }
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('fade-in');
+                    observer.unobserve(entry.target);
+                }
+            });
+        }, { threshold: 0.2 });
+
+        document.querySelectorAll('.resource-item').forEach(item => {
+            observer.observe(item);
+        });
+
+        const bee = document.querySelector('.wandering-bee');
+        
+        function moveBee() {
+            const viewportWidth = window.innerWidth;
+            const viewportHeight = window.innerHeight;
+            const beeSize = 50; 
+            
+            const randomX = Math.random() * (viewportWidth - beeSize);
+            const randomY = Math.random() * (viewportHeight - beeSize);
+
+            bee.style.transition = 'transform 2s ease-in-out';
+            bee.style.transform = `translate(${randomX}px, ${randomY}px)`;
+        }
+
+        // Mueve la abeja al cargar la página
+        moveBee();
+
+        // Mueve la abeja cada 5 segundos
+        setInterval(moveBee, 5000);
+    </script>
+</body>
+</html>

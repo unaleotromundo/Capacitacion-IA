@@ -602,11 +602,159 @@
                 margin-right: 5px;
             }
         }
+        
+        /* Estilos para la burbuja cósmica con anillo */
+        .cosmic-bubble-container {
+            position: fixed;
+            bottom: 400px;
+            right: 20px;
+            z-index: 1000;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            animation: floating 3s ease-in-out infinite;
+        }
+
+        .cosmic-bubble {
+            width: 80px;
+            height: 80px;
+            background: radial-gradient(circle, #003366 30%, #1a73e8 100%);
+            border-radius: 50%;
+            box-shadow: 0 0 15px rgba(0, 51, 102, 0.7), 0 0 25px rgba(26, 115, 232, 0.5);
+            cursor: pointer;
+            position: relative;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .cosmic-bubble:hover {
+            transform: scale(1.08);
+            box-shadow: 0 0 20px rgba(0, 51, 102, 0.9), 0 0 35px rgba(26, 115, 232, 0.7);
+        }
+        
+        .cosmic-bubble i {
+            color: white;
+            font-size: 2.5rem;
+            z-index: 2;
+        }
+
+        .cosmic-link-ring {
+            position: absolute;
+            width: 100px;
+            height: 100px;
+            border: 3px solid #ffcc00;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            z-index: 1;
+            opacity: 0;
+            animation: pulse-ring 2s infinite ease-out;
+        }
+
+        .cosmic-bubble-container:hover .cosmic-link-ring {
+            opacity: 1;
+            animation-play-state: running;
+        }
+        
+        @keyframes pulse-ring {
+            0% { transform: scale(0.8); opacity: 0; }
+            50% { transform: scale(1.1); opacity: 0.7; }
+            100% { transform: scale(0.8); opacity: 0; }
+        }
+
+        @media (max-width: 768px) {
+            .cosmic-bubble-container {
+                bottom: 250px;
+                right: 15px;
+            }
+            .cosmic-bubble {
+                width: 70px;
+                height: 70px;
+            }
+            .cosmic-bubble i {
+                font-size: 2.2rem;
+            }
+            .cosmic-link-ring {
+                width: 90px;
+                height: 90px;
+            }
+        }
+
+        /* Estilos y animación para la abeja que deambula */
+        .wandering-bee {
+            position: fixed;
+            width: 50px;
+            height: 50px;
+            background: linear-gradient(45deg, #ffcc00, #ff9900);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+            z-index: 998;
+            transition: transform 2s ease-in-out, background 0.5s ease;
+            cursor: pointer;
+        }
+
+        .wandering-bee i {
+            font-size: 2rem;
+            color: #003366;
+            animation: pulse 1.5s infinite ease-in-out;
+        }
+        
+        .wandering-bee:hover {
+            transform: scale(1.1);
+            box-shadow: 0 6px 20px rgba(0, 0, 0, 0.3);
+        }
+
+        @keyframes pulse {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.15); }
+            100% { transform: scale(1); }
+        }
+
+        /* Estilos para el nuevo contenedor de íconos agrupados */
+        .grouped-icons {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .icon-circle {
+            width: 40px;
+            height: 40px;
+            background-color: #003366;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+        }
+
+        .icon-circle i {
+            font-size: 1.2em;
+            color: #ffcc00;
+        }
+
+        /* Nuevo estilo para la tarjeta de docentes fusionada */
+        .teachers-tools {
+            background: linear-gradient(to right, rgba(255, 255, 255, 0.95), rgba(255, 255, 255, 0.85));
+            border-left: 4px solid #1a73e8;
+        }
+
     </style>
 </head>
 
 <body>
     <div class="background-pattern"></div>
+    <a href="indexviaje.html" class="wandering-bee">
+<i class="fa-solid fa-bee fa-flip"></i>
+    </a>
 
     <header>
         <div class="header-content">
@@ -637,24 +785,26 @@
                     <p>La plataforma de diseño gráfico que incorpora inteligencia artificial para crear presentaciones, materiales visuales y actividades interactivas automáticamente. Ideal para hacer que tus clases sean más atractivas.</p>
                 </div>
                 <div class="resource-item">
-                    <h3><i class="fas fa-lightbulb"></i> Google Gemini <span class="tag">Ideas</span></h3>
-                    <a href="https://gemini.google.com/" target="_blank">Visitar sitio <i class="fas fa-arrow-right"></i></a>
-                    <p>Asistente conversacional avanzado para generar ideas, textos educativos, ejercicios y actividades. Perfecto para romper el bloqueo creativo y planificar tus clases con eficiencia.</p>
+                    <h3 class="grouped-icons"><span class="icon-circle"><i class="fas fa-lightbulb"></i></span><span class="icon-circle"><i class="fas fa-comments"></i></span> Google Gemini & ChatGPT <span class="tag">Ideas</span> <span class="tag">Conversación</span></h3>
+                    <a href="https://gemini.google.com/" target="_blank">Visitar Gemini <i class="fas fa-arrow-right"></i></a>
+                    <a href="https://chatgpt.com/" target="_blank">Visitar ChatGPT <i class="fas fa-arrow-right"></i></a>
+                    <p>Google Gemini es un asistente conversacional avanzado para generar ideas, textos educativos, ejercicios y actividades. Por su parte, ChatGPT es un modelo de lenguaje avanzado que te ayuda a crear actividades, corregir textos, responder preguntas de estudiantes y generar contenido educativo de alta calidad. Ambas son perfectas para romper el bloqueo creativo y planificar tus clases con eficiencia.</p>
+                </div>
+                <div class="resource-item teachers-tools">
+                    <h3 class="grouped-icons"><span class="icon-circle"><i class="fas fa-school"></i></span><span class="icon-circle"><i class="fas fa-robot"></i></span> MagicSchool AI & EDTK <span class="tag">Docentes</span><span class="tag">Plataforma</span></h3>
+                    <a href="https://www.magicschool.ai/" target="_blank">Visitar MagicSchool AI <i class="fas fa-arrow-right"></i></a>
+                    <a href="https://edtk.co/" target="_blank">Visitar EDTK <i class="fas fa-arrow-right"></i></a>
+                    <p>MagicSchool AI es el asistente de IA para educadores más utilizado, diseñado para simplificar tareas docentes, ahorrar tiempo y combatir el agotamiento profesional. Su interfaz intuitiva y prompts guiados hacen que la preparación y planificación sean más rápidas que nunca. Por otro lado, EDTK es una plataforma para docentes que utiliza la IA para generar actividades, planificaciones de clase y evaluaciones de manera rápida y eficiente. Ambas herramientas son ideales para reducir la carga de trabajo y optimizar los procesos de enseñanza.</p>
                 </div>
                 <div class="resource-item">
-                    <h3><i class="fas fa-comments"></i> ChatGPT <span class="tag">Conversación</span></h3>
-                    <a href="https://chatgpt.com/" target="_blank">Visitar sitio <i class="fas fa-arrow-right"></i></a>
-                    <p>El modelo de lenguaje avanzado que te ayuda a crear actividades, corregir textos, responder preguntas de estudiantes y generar contenido educativo de alta calidad. Ideal para tareas de redacción y planificación.</p>
+                    <h3><i class="fas fa-table"></i> Tabla Comparativa de IA <span class="tag">Análisis</span></h3>
+                    <a href="https://andreaoviedov.com/ia/" target="_blank">Ver tabla interactiva <i class="fas fa-arrow-right"></i></a>
+                    <p>Explora y compara herramientas de inteligencia artificial a través de una tabla interactiva que te permite filtrar y encontrar el recurso ideal para tus necesidades educativas.</p>
                 </div>
                 <div class="resource-item">
                     <h3><i class="fas fa-microchip"></i> Teachable Machine <span class="tag">Proyecto</span></h3>
                     <a href="https://teachablemachine.withgoogle.com/" target="_blank">Visitar sitio <i class="fas fa-arrow-right"></i></a>
                     <p>Herramienta de Google que permite a tus alumnos crear modelos de IA simples usando imágenes, sonidos o poses. Excelente para proyectos STEM, aprendizaje activo y demostraciones de inteligencia artificial en el aula.</p>
-                </div>
-                <div class="resource-item">
-                    <h3><i class="fas fa-school"></i> MagicSchool AI <span class="tag">Docentes</span></h3>
-                    <a href="https://www.magicschool.ai/" target="_blank">Visitar sitio <i class="fas fa-arrow-right"></i></a>
-                    <p>El asistente de IA para educadores más utilizado en el mundo, diseñado para simplificar tareas docentes, ahorrar tiempo y combatir el agotamiento profesional. Su interfaz intuitiva y prompts guiados hacen que la preparación y planificación sean más rápidas que nunca.</p>
                 </div>
                 <div class="resource-item">
                     <h3><i class="fas fa-chart-line"></i> Califica</h3>
@@ -670,11 +820,6 @@
                     <h3><i class="fas fa-microchip"></i> Google AI for Educators <span class="tag">Docentes</span></h3>
                     <a href="https://grow.google/ai-for-educators/" target="_blank">Visitar sitio <i class="fas fa-arrow-right"></i></a>
                     <p>Una colección de herramientas de inteligencia artificial de Google diseñadas específicamente para educadores. Incluye recursos, guías y cursos para integrar la IA en el aula y mejorar los procesos de enseñanza.</p>
-                </div>
-                <div class="resource-item">
-                    <h3><i class="fas fa-school"></i> EDTK <span class="tag">Plataforma</span></h3>
-                    <a href="https://edtk.co/" target="_blank">Visitar sitio <i class="fas fa-arrow-right"></i></a>
-                    <p>Plataforma para docentes que utiliza la IA para generar actividades, planificaciones de clase, y evaluaciones de manera rápida y eficiente. Ideal para ahorrar tiempo en la preparación del material didáctico.</p>
                 </div>
                 <div class="resource-item">
                     <h3><i class="fas fa-gamepad"></i> Kahoot! <span class="tag">Juego</span></h3>
@@ -710,6 +855,14 @@
             <span>Podcast SecundarIA</span>
         </a>
     </div>
+    
+    <div class="cosmic-bubble-container">
+        <div class="cosmic-link-ring" onclick="window.open('https://notebooklm.google.com/', '_blank');"></div>
+        <div class="cosmic-bubble" data-file="audionotebook.m4A" onclick="handlePodcastClick(this)">
+            <i class="fas fa-play"></i>
+        </div>
+    </div>
+    
     <footer>
         <div class="footer-content">
             <p>&copy; 2025 Capacitación IA. Transformando la educación con inteligencia artificial.</p>
@@ -775,6 +928,26 @@
         document.querySelectorAll('.resource-item').forEach(item => {
             observer.observe(item);
         });
+
+        const bee = document.querySelector('.wandering-bee');
+        
+        function moveBee() {
+            const viewportWidth = window.innerWidth;
+            const viewportHeight = window.innerHeight;
+            const beeSize = 50; 
+            
+            const randomX = Math.random() * (viewportWidth - beeSize);
+            const randomY = Math.random() * (viewportHeight - beeSize);
+
+            bee.style.transition = 'transform 2s ease-in-out';
+            bee.style.transform = `translate(${randomX}px, ${randomY}px)`;
+        }
+
+        // Mueve la abeja al cargar la página
+        moveBee();
+
+        // Mueve la abeja cada 5 segundos
+        setInterval(moveBee, 5000);
     </script>
 </body>
 </html>

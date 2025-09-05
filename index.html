@@ -850,6 +850,39 @@
                 margin-right: 0;
             }
         }
+.pseudo-button {
+    font-family: 'Montserrat', sans-serif;
+    color: white; /* Color del texto */
+    background: linear-gradient(135deg, #1a73e8, #e6f0fc); /* Gradiente de fondo */
+    padding: 15px 30px; /* Espacio interno */
+    border-radius: 50px; /* Bordes redondeados */
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2); /* Sombra */
+    cursor: pointer; /* Cambia el cursor para simular un botón */
+    transition: all 0.3s ease; /* Transición suave para todos los efectos */
+    display: inline-flex; /* Permite alinear el ícono y el texto */
+    align-items: center; /* Alinea verticalmente */
+    justify-content: center; /* Centra el contenido */
+    gap: 10px; /* Espacio entre el ícono y el texto */
+}
+
+.pseudo-button:hover {
+    transform: translateY(-3px) scale(1.02); /* Levanta y agranda al pasar el mouse */
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3); /* Sombra más pronunciada */
+}
+
+.pseudo-button:active {
+    transform: translateY(1px) scale(0.98); /* Se presiona al hacer clic */
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2); /* Sombra más sutil */
+}
+
+.pseudo-button i {
+    color: #ffcc00; /* Color del ícono */
+    transition: transform 0.3s ease; /* Transición para el ícono */
+}
+
+.pseudo-button:hover i {
+    transform: rotate(15deg); /* Gira el ícono al pasar el mouse */
+}
     </style>
 </head>
 
@@ -893,8 +926,7 @@
     <main>
         <div class="container">
             <div class="resources-container" title="Contenedor de recursos digitales">
-                <h2><i class="fas fa-book-open"></i> Recursos Digitales</h2>
-
+		<h2 class="pseudo-button"><i class="fas fa-book-open"></i> Recursos Digitales</h2>
                 <div class="resource-item" title="Recurso: Recursos EduIA LAB">
                     <h3><i class="fas fa-robot"></i> Recursos EduIA LAB (Ceibal) <span class="tag">Uruguay</span></h3>
                     <a href="https://ceibal.edu.uy/institucional/eduia/eduia-lab/recursos/" target="_blank" title="Visitar el sitio web de EduIA LAB">Visitar sitio <i class="fas fa-arrow-right"></i></a>
@@ -969,7 +1001,7 @@
         </div>
     </main>
     <div class="chat-call-to-action" title="Mensaje para iniciar el chat con el asistente">
-        Hola soy Niko me entrenaron para acompañarte en este valioso viaje!!
+        Preguntame lo que necesites, ¡estoy a las órdenes!
     </div>
     <div class="podcast-buttons-container">
         <a class="podcast-button" data-file="podcastia1.m4a" onclick="handlePodcastClick(this)" title="Reproducir Podcast Introductorio">

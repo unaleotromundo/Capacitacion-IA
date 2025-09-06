@@ -261,7 +261,7 @@ const courseData = {
                 type: 'practical',
                 title: 'Conoce a tu Asistente',
                 description: 'Para tener una primera experiencia tangible y positiva, te invitamos a abrir IABee (el ícono de la abeja a la derecha) y probar con una pregunta sencilla. Esto te permitirá ver la magia en acción.',
-                prompt: '¿Puedes explicarme qué es la fotosíntesis como si yo tuviera 10 años y me encantara el béisbol?',
+                prompt: '¿Puedes explicarme qué es la fotosíntesis como si yo tuviera 10 años y me encantara el fútbol?',
                 instruction: 'Observa cómo la IA no solo simplifica el concepto, sino que utiliza analogías relacionadas con el béisbol para hacerlo más cercano y comprensible. Esta es la esencia de tu nuevo asistente.',
                 responseField: 'Describe qué pasó cuando probaste este prompt y qué te pareció la respuesta de la IA:'
             },

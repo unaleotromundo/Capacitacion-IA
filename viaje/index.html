@@ -1,0 +1,413 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Tu Viaje para Convertirte en un Educador Potenciado por IA - Curso interactivo">
+    <title>Tu Viaje - Educador Potenciado por IA</title>
+    
+    <!-- Fuentes profesionales y legibles -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+    
+    <!-- Iconos -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <!-- Botpress Chat -->
+    <script src="https://cdn.botpress.cloud/webchat/v3.2/inject.js"></script>
+    <script src="https://files.bpcontent.cloud/2025/08/28/18/20250828181855-SDCU21ES.js" defer></script>
+    
+    <!-- Estilos -->
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <!-- 🐝 ABEJITA ANIMADA -->
+    <a href="index.html" class="wandering-bee" id="bee-button" title="Volver al inicio">
+        <svg version="1.0" xmlns="http://www.w3.org/2000/svg"
+         width="256.000000pt" height="252.000000pt" viewBox="0 0 256.000000 252.000000"
+         preserveAspectRatio="xMidYMid meet">
+        <g transform="translate(0.000000,252.000000) scale(0.100000,-0.100000)"
+        fill="#000000" stroke="none">
+        <path d="M1010 2018 c-31 -34 -26 -72 18 -121 37 -41 38 -43 26 -77 -7 -19
+        -13 -69 -13 -111 l-1 -76 -51 -11 c-128 -30 -263 -123 -338 -234 -75 -110
+        -111 -229 -111 -366 0 -58 3 -66 31 -94 l30 -31 102 6 c56 3 123 13 150 21
+        210 67 361 227 414 441 19 76 20 75 48 -38 31 -120 120 -244 232 -321 97 -66
+        194 -97 320 -104 l102 -5 32 32 31 32 -5 112 c-7 165 -56 282 -164 391 -85 87
+        -149 121 -320 172 -9 2 -13 27 -13 80 0 42 -5 94 -12 116 -11 38 -10 40 25 76
+        90 93 -5 186 -97 96 -36 -35 -39 -36 -76 -25 -49 14 -125 14 -167 -1 -31 -11
+        -35 -10 -71 25 -45 44 -89 50 -122 15z"/>
+        <path d="M1205 955 c-57 -56 -103 -91 -154 -117 l-73 -38 313 0 314 0 -42 20
+        c-66 30 -131 77 -208 149 l-70 66 -80 -80z"/>
+        <path d="M1126 568 c96 -91 132 -118 160 -118 24 0 109 66 184 144 l44 46
+        -232 0 -232 0 76 -72z"/>
+        </g>
+        </svg>
+    </a>
+
+    <!-- Header Principal -->
+    <header class="main-header">
+        <div class="header-content">
+            <button class="mobile-menu-toggle" id="mobileMenuToggle">
+                <i class="fas fa-bars"></i>
+            </button>
+            <h1>
+                <i class="fas fa-graduation-cap header-icon"></i>
+                Tu Viaje - Educador Potenciado por IA
+            </h1>
+            <div class="header-progress">
+                <div class="progress-indicator">
+                    <div class="progress-bar">
+                        <div class="progress-fill" id="headerProgressFill"></div>
+                    </div>
+                    <span class="progress-text" id="headerProgressText">0% completado</span>
+                </div>
+            </div>
+            <button class="btn btn-primary btn-small" id="resetCourseBtn" title="Reiniciar curso desde cero" style="display: none;">
+                <i class="fas fa-redo"></i> Reiniciar Curso
+            </button>
+        </div>
+    </header>
+
+    <!-- Contenedor Principal -->
+    <div class="main-container">
+        <!-- Navegación Lateral -->
+        <nav class="sidebar" id="sidebar">
+            <div class="sidebar-content">
+                <div class="course-title">
+                    <h2>📚 Contenido del Curso</h2>
+                </div>
+                
+                <!-- Introducción -->
+                <div class="nav-section">
+                    <div class="nav-item" data-lesson="intro">
+                        <i class="fas fa-home nav-icon"></i>
+                        <span class="nav-text">Introducción</span>
+                        <i class="fas fa-check nav-status completed" style="display: none;"></i>
+                        <i class="fas fa-lock nav-status locked" style="display: none;"></i>
+                    </div>
+                </div>
+
+                <!-- Módulo 1: Fundamentos -->
+                <div class="nav-section">
+                    <div class="nav-module">
+                        <i class="fas fa-book nav-icon"></i>
+                        <span class="nav-text">Módulo 1: Fundamentos de la IA Generativa</span>
+                    </div>
+                    <div class="nav-lessons">
+                        <div class="nav-item" data-lesson="1.1">
+                            <span class="lesson-number">1.1</span>
+                            <span class="nav-text">¿Qué es la IA Generativa?</span>
+                            <i class="fas fa-check nav-status completed" style="display: none;"></i>
+                            <i class="fas fa-lock nav-status locked"></i>
+                        </div>
+                        <div class="nav-item" data-lesson="1.2">
+                            <span class="lesson-number">1.2</span>
+                            <span class="nav-text">El "Superpoder" de la IA</span>
+                            <i class="fas fa-check nav-status completed" style="display: none;"></i>
+                            <i class="fas fa-lock nav-status locked"></i>
+                        </div>
+                        <div class="nav-item" data-lesson="1.3">
+                            <span class="lesson-number">1.3</span>
+                            <span class="nav-text">Conociendo a tus Asistentes</span>
+                            <i class="fas fa-check nav-status completed" style="display: none;"></i>
+                            <i class="fas fa-lock nav-status locked"></i>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Módulo 2: Prompting -->
+                <div class="nav-section">
+                    <div class="nav-module">
+                        <i class="fas fa-edit nav-icon"></i>
+                        <span class="nav-text">Módulo 2: El Arte del Prompting</span>
+                    </div>
+                    <div class="nav-lessons">
+                        <div class="nav-item" data-lesson="2.1">
+                            <span class="lesson-number">2.1</span>
+                            <span class="nav-text">¿Qué es un "Prompt"?</span>
+                            <i class="fas fa-check nav-status completed" style="display: none;"></i>
+                            <i class="fas fa-lock nav-status locked"></i>
+                        </div>
+                        <div class="nav-item" data-lesson="2.2">
+                            <span class="lesson-number">2.2</span>
+                            <span class="nav-text">La Fórmula Mágica R-C-T-F-E-T</span>
+                            <i class="fas fa-check nav-status completed" style="display: none;"></i>
+                            <i class="fas fa-lock nav-status locked"></i>
+                        </div>
+                        <div class="nav-item" data-lesson="2.3">
+                            <span class="lesson-number">2.3</span>
+                            <span class="nav-text">¡A Practicar!</span>
+                            <i class="fas fa-check nav-status completed" style="display: none;"></i>
+                            <i class="fas fa-lock nav-status locked"></i>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Módulo 3: Plantillas -->
+                <div class="nav-section">
+                    <div class="nav-module">
+                        <i class="fas fa-tools nav-icon"></i>
+                        <span class="nav-text">Módulo 3: Plantillas Prácticas</span>
+                    </div>
+                    <div class="nav-lessons">
+                        <div class="nav-item" data-lesson="3.1">
+                            <span class="lesson-number">3.1</span>
+                            <span class="nav-text">Planificación de Clases</span>
+                            <i class="fas fa-check nav-status completed" style="display: none;"></i>
+                            <i class="fas fa-lock nav-status locked"></i>
+                        </div>
+                        <div class="nav-item" data-lesson="3.2">
+                            <span class="lesson-number">3.2</span>
+                            <span class="nav-text">Creación de Materiales</span>
+                            <i class="fas fa-check nav-status completed" style="display: none;"></i>
+                            <i class="fas fa-lock nav-status locked"></i>
+                        </div>
+                        <div class="nav-item" data-lesson="3.3">
+                            <span class="lesson-number">3.3</span>
+                            <span class="nav-text">Atención a la Diversidad</span>
+                            <i class="fas fa-check nav-status completed" style="display: none;"></i>
+                            <i class="fas fa-lock nav-status locked"></i>
+                        </div>
+                        <div class="nav-item" data-lesson="3.4">
+                            <span class="lesson-number">3.4</span>
+                            <span class="nav-text">Evaluaciones y Rúbricas</span>
+                            <i class="fas fa-check nav-status completed" style="display: none;"></i>
+                            <i class="fas fa-lock nav-status locked"></i>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Módulo 4: Técnicas Avanzadas -->
+                <div class="nav-section">
+                    <div class="nav-module">
+                        <i class="fas fa-rocket nav-icon"></i>
+                        <span class="nav-text">Módulo 4: Técnicas Avanzadas</span>
+                    </div>
+                    <div class="nav-lessons">
+                        <div class="nav-item" data-lesson="4.1">
+                            <span class="lesson-number">4.1</span>
+                            <span class="nav-text">El Poder de la Iteración</span>
+                            <i class="fas fa-check nav-status completed" style="display: none;"></i>
+                            <i class="fas fa-lock nav-status locked"></i>
+                        </div>
+                        <div class="nav-item" data-lesson="4.2">
+                            <span class="lesson-number">4.2</span>
+                            <span class="nav-text">Pensamiento Paso a Paso</span>
+                            <i class="fas fa-check nav-status completed" style="display: none;"></i>
+                            <i class="fas fa-lock nav-status locked"></i>
+                        </div>
+                        <div class="nav-item" data-lesson="4.3">
+                            <span class="lesson-number">4.3</span>
+                            <span class="nav-text">Plantillas Reutilizables</span>
+                            <i class="fas fa-check nav-status completed" style="display: none;"></i>
+                            <i class="fas fa-lock nav-status locked"></i>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Módulo 5: Uso Ético -->
+                <div class="nav-section">
+                    <div class="nav-module">
+                        <i class="fas fa-shield-alt nav-icon"></i>
+                        <span class="nav-text">Módulo 5: Uso Ético y Responsable</span>
+                    </div>
+                    <div class="nav-lessons">
+                        <div class="nav-item" data-lesson="5.1">
+                            <span class="lesson-number">5.1</span>
+                            <span class="nav-text">Protegiendo la Privacidad</span>
+                            <i class="fas fa-check nav-status completed" style="display: none;"></i>
+                            <i class="fas fa-lock nav-status locked"></i>
+                        </div>
+                        <div class="nav-item" data-lesson="5.2">
+                            <span class="lesson-number">5.2</span>
+                            <span class="nav-text">Evitando el Sesgo</span>
+                            <i class="fas fa-check nav-status completed" style="display: none;"></i>
+                            <i class="fas fa-lock nav-status locked"></i>
+                        </div>
+                        <div class="nav-item" data-lesson="5.3">
+                            <span class="lesson-number">5.3</span>
+                            <span class="nav-text">Integridad Académica</span>
+                            <i class="fas fa-check nav-status completed" style="display: none;"></i>
+                            <i class="fas fa-lock nav-status locked"></i>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Certificado -->
+                <div class="nav-section">
+                    <div class="nav-item" data-lesson="certificate">
+                        <i class="fas fa-certificate nav-icon"></i>
+                        <span class="nav-text">Certificado y Conclusión</span>
+                        <i class="fas fa-check nav-status completed" style="display: none;"></i>
+                        <i class="fas fa-lock nav-status locked"></i>
+                    </div>
+                </div>
+            </div>
+        </nav>
+
+        <!-- Área de Contenido Principal -->
+        <main class="main-content" id="mainContent">
+            <div class="content-container">
+                <div id="lessonContent">
+                    <!-- Contenido se cargará dinámicamente -->
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <!-- Modal para Certificado -->
+    <div class="modal-overlay" id="certificateModal" style="display: none;">
+        <div class="certificate-modal">
+            <div class="certificate-content">
+                <div class="certificate-header">
+                    <h2><i class="fas fa-graduation-cap"></i> ¡Felicitaciones!</h2>
+                    <p>Has completado "Tu Viaje para Convertirte en un Educador Potenciado por IA"</p>
+                </div>
+                
+                <div class="ai-conclusion">
+                    <h3><i class="fas fa-lightbulb"></i> Tu Reflexión Personalizada</h3>
+                    <div class="conclusion-content" id="generatedConclusion">
+                        <div class="loading-conclusion">
+                            <i class="fas fa-spinner fa-spin"></i>
+                            Generando tu conclusión personalizada...
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="certificate-actions">
+                    <button class="btn btn-primary" id="downloadCertificate">
+                        <i class="fas fa-download"></i> Descargar Certificado de <span id="studentNameInBtn">...</span>
+                    </button>
+                    <button class="btn btn-secondary" id="shareCertificate">
+                        <i class="fas fa-share"></i> Compartir Logro
+                    </button>
+                    <button class="btn btn-primary" id="resetCourseBtn" style="margin-top: 1rem;">
+                        <i class="fas fa-redo"></i> Reiniciar Curso desde Cero
+                    </button>
+                    <button class="btn btn-outline" id="closeCertificate">
+                        <i class="fas fa-times"></i> Cerrar
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Certificado Visual Profesional (versión realista) -->
+    <div id="certificatePreview" style="display: none; max-width: 800px; margin: 2rem auto; border: 4px double #d4af37; border-radius: 20px; overflow: hidden; box-shadow: 0 15px 50px rgba(0, 0, 0, 0.3); background: #fffbeb; font-family: 'Times New Roman', serif; position: relative;">
+        <div style="background: #003366; color: #d4af37; padding: 2rem 1rem; text-align: center; position: relative;">
+            <h1 style="margin: 0; font-size: 2.8rem; letter-spacing: 4px; text-transform: uppercase; font-weight: bold; text-shadow: 2px 2px 4px rgba(0,0,0,0.3);">
+                CERTIFICADO
+            </h1>
+            <p style="margin: 0.5rem 0 0; font-size: 1.2rem; opacity: 0.9; font-style: italic;">
+                de Finalización y Excelencia Académica
+            </p>
+            <div style="width: 100px; height: 3px; background: #d4af37; margin: 1rem auto;"></div>
+        </div>
+        <div style="padding: 3rem 2rem; color: #003366; text-align: center; background: white; position: relative;">
+            <div style="position: absolute; top: 0; right: 0; width: 120px; height: 120px; background: repeating-linear-gradient(45deg, #003366, #003366 10px, #d4af37 10px, #d4af37 20px); opacity: 0.1;"></div>
+            
+            <p style="font-size: 1.3rem; margin: 1.5rem 0; line-height: 1.8; font-weight: 500;">
+                Este certificado atesta que
+            </p>
+            <h1 id="certificateName" style="color: #003366; font-size: 3.2rem; margin: 1.5rem 0; font-weight: bold; font-style: italic; letter-spacing: 1px; text-shadow: 1px 1px 2px rgba(0,0,0,0.1);">
+                Nombre del Participante
+            </h1>
+            <p style="font-size: 1.3rem; line-height: 1.8; margin: 1.5rem 0; font-weight: 500;">
+                ha completado con éxito el curso<br>
+                <strong>“Capacitación en IA: Herramientas esenciales para docentes”</strong>,<br>
+                demostrando un dominio de los principios y la aplicación práctica<br>
+                de la inteligencia artificial para optimizar la enseñanza.
+            </p>
+            <p style="font-size: 1.2rem; margin: 2rem 0; line-height: 1.6; font-weight: 500;">
+                Finalizado el <strong id="endDate">01 de Enero de 2024</strong>.
+            </p>
+            <div style="margin-top: 3rem; padding-top: 1.5rem; border-top: 1px solid #003366; text-align: center;">
+                <div style="width: 250px; height: 1px; background: #003366; margin: 0 auto 0.5rem auto;"></div>
+                <p style="margin: 0; font-size: 1.1rem; font-weight: bold; color: #003366;">
+                    Dirección General de Capacitación IA
+                </p>
+            </div>
+        </div>
+        <div style="background: #f8f9fa; padding: 1rem; text-align: center; font-size: 0.85rem; color: #666; border-top: 1px solid #eee; font-style: italic;">
+            <p style="margin: 0;">Documento oficial • ID: IA-DOC-<span id="certId">00001</span> • Fecha de emisión: <span id="issueDate">01/01/2024</span></p>
+        </div>
+    </div>
+
+    <!-- Overlay para móvil -->
+    <div class="mobile-overlay" id="mobileOverlay" style="display: none;"></div>
+
+    <!-- Scripts -->
+    <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
+    <script src="jsPDF.min.js"></script>
+    <script src="app.js"></script>
+
+    <!-- 🐝 SCRIPT DE LA ABEJITA -->
+    <script>
+    // Funcionalidad de la abejita
+    function moveBee() {
+        const viewportWidth = window.innerWidth;
+        const viewportHeight = window.innerHeight;
+        const beeSize = 40; 
+        const randomX = Math.random() * (viewportWidth - beeSize);
+        const randomY = Math.random() * (viewportHeight - beeSize);
+        bee.style.transition = 'transform 2s ease-in-out';
+        bee.style.transform = `translate(${randomX}px, ${randomY}px)`;
+    }
+
+    function startMovingBee() {
+        moveBee();
+        moveInterval = setInterval(moveBee, 2000);
+        stopTimeout = setTimeout(stopAndPlaceBee, 5000);
+    }
+
+    function stopAndPlaceBee() {
+        clearInterval(moveInterval);
+        bee.style.transition = 'transform 1s ease-in-out';
+        bee.style.transform = `translate(20px, 20px)`;
+    }
+
+    const bee = document.getElementById('bee-button');
+    let moveInterval;
+    let stopTimeout;
+
+    window.addEventListener('load', startMovingBee);
+    </script>
+
+    <!-- 🐝 ESTILOS DE LA ABEJITA -->
+    <style>
+    .wandering-bee {
+        position: fixed;
+        width: 40px;
+        height: 40px;
+        background: linear-gradient(45deg, #ffcc00, #ff9900);
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+        z-index: 998;
+        transition: transform 2s ease-in-out, background 0.5s ease;
+        cursor: pointer;
+        text-decoration: none;
+    }
+
+    .wandering-bee svg {
+        width: 60%;
+        height: 60%;
+        fill: #003366;
+        animation: pulse 1.5s infinite ease-in-out;
+    }
+
+    .wandering-bee:hover {
+        transform: scale(1.1);
+        box-shadow: 0 6px 20px rgba(0, 0, 0, 0.3);
+    }
+
+    @keyframes pulse {
+        0% { transform: scale(1); }
+        50% { transform: scale(1.15); }
+        100% { transform: scale(1); }
+    }
+    </style>
+</body>
+</html>

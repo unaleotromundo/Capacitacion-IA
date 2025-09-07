@@ -1,0 +1,147 @@
+<!DOCTYPE html> 
+<html> 
+  <head> 
+    <meta charset="UTF-8"> 
+    <title>Descubre tu Superpoder</title> 
+    <style> 
+      body { 
+        font-family: 'Segoe UI', Arial, sans-serif; 
+        background: #f9f9fc; 
+        color: #222; 
+        padding: 30px; 
+        max-width: 500px; 
+        margin: auto; 
+      } 
+      h1 { 
+        color: #4e54c8; 
+        text-align: center; 
+      } 
+      form { 
+        margin-bottom: 20px; 
+        display: flex; 
+        flex-direction: column; 
+        gap: 10px; 
+      } 
+      input[type="text"] { 
+        padding: 8px; 
+        border-radius: 5px; 
+        border: 1px solid #bbb; 
+      } 
+      button { 
+        background: #4e54c8; 
+        color: #fff; 
+        border: none; 
+        padding: 10px; 
+        border-radius: 5px; 
+        font-size: 1em; 
+        cursor: pointer; 
+        transition: background 0.2s; 
+      } 
+      button:hover { 
+        background: #6c63ff; 
+      } 
+      .resultado, .preguntas, .consejo { 
+        background: #fff; 
+        border-radius: 8px; 
+        box-shadow: 0 2px 8px #eee; 
+        padding: 16px; 
+        margin-bottom: 15px; 
+      } 
+      .preguntas ul { 
+        padding-left: 18px; 
+      } 
+    </style> 
+  </head> 
+  <body> 
+    <h1>Descubre tu Superpoder</h1> 
+    <form id="superpoder-form"> 
+      <label for="nombre">Nombre completo:</label> 
+      <input type="text" id="nombre" name="nombre" required /> 
+      <button type="submit">Descubrir mi número especial</button> 
+    </form> 
+    <div id="resultado-numero" class="resultado"></div> 
+    <div id="preguntas-personalizadas" class="preguntas"></div> 
+    <div id="consejo-ia" class="consejo"></div> 
+    <script> 
+      // Asignación de valores según gematría hebrea (A=1, B=2, ..., V=22, W=1, X=2, etc.) 
+      function letraAGematria(letra) { 
+        const abecedario = "ABCDEFGHIJKLMNOPQRSTUVWXYZ"; 
+        letra = letra.toUpperCase(); 
+        const idx = abecedario.indexOf(letra); 
+        if (idx === -1) return 0; 
+        return (idx % 22) + 1; 
+      } 
+ 
+      function calcularNumeroGematria(nombre) { 
+        let suma = 0; 
+        for (let i = 0; i < nombre.length; i++) { 
+          suma += letraAGematria(nombre[i]); 
+        } 
+        // Reducir a 1-22 
+        while (suma > 22) { 
+          suma = suma.toString().split('').reduce((a, b) => a + parseInt(b), 0); 
+        } 
+        return suma; 
+      } 
+ 
+      // Preguntas base (puedes personalizarlas según el número) 
+      const preguntasPorNumero = { 
+        1: [ 
+          "¿Cuándo te sentís más valiente o líder?", 
+          "¿Qué te gustaría crear o iniciar en tu vida?", 
+          "¿Cómo ayudas a otros a tomar decisiones?", 
+          "¿Qué sueño te gustaría alcanzar primero?", 
+          "¿Cómo te gustaría inspirar a tus amigos?" 
+        ], 
+        2: [ 
+          "¿En qué momentos te gusta trabajar en equipo?", 
+          "¿Cómo ayudas a que otros se sientan mejor?", 
+          "¿Qué te hace sentir que sos un buen amigo/a?", 
+          "¿Cómo resolvés los conflictos con los demás?", 
+          "¿Qué harías para unir a personas diferentes?" 
+        ], 
+        3: [ 
+          "¿Cuándo te divertís más expresándote?", 
+          "¿Qué te gusta compartir con los demás?", 
+          "¿Cómo usás tu creatividad día a día?", 
+          "¿Qué te hace reír y cómo hacés reír a otros?", 
+          "¿Cómo mostrarías tu alegría al mundo?" 
+        ], 
+        // ... Puedes agregar preguntas para los números 4 al 22 
+      }; 
+ 
+      // Consejo IA por número (ejemplo) 
+      const consejoPorNumero = { 
+        1: "Tu superpoder es el liderazgo. ¡Animate a guiar a otros y a empezar nuevos proyectos!", 
+        2: "Tu superpoder es la cooperación. Ayudás a unir a las personas y crear armonía.", 
+        3: "Tu superpoder es la creatividad. Usá tu imaginación para alegrar a quienes te rodean.", 
+        // ... Puedes agregar consejos para los números 4 al 22 
+      }; 
+ 
+      document.getElementById('superpoder-form').addEventListener('submit', function(e) { 
+        e.preventDefault(); 
+        const nombre = document.getElementById('nombre').value.trim(); 
+        if (!nombre) return; 
+        const numero = calcularNumeroGematria(nombre.replace(/[^A-Za-z]/g, '')); 
+        document.getElementById('resultado-numero').innerHTML = 
+          `<strong>Tu número especial es: ${numero}</strong>`; 
+        // Seleccionar preguntas y consejo 
+        const preguntas = preguntasPorNumero[numero] || [ 
+          "¿Qué te hace sentir especial?", 
+          "¿Cuándo sentís que brillás más?", 
+          "¿Qué te gustaría mejorar de vos?", 
+          "¿Cómo te gustaría ayudar a otros?", 
+          "¿Qué sueño te gustaría cumplir?" 
+        ]; 
+        const consejo = consejoPorNumero[numero] || "Tenés un superpoder único. ¡Usalo para dar tu luz al mundo!"; 
+        // Mostrar preguntas 
+        document.getElementById('preguntas-personalizadas').innerHTML = 
+          "<strong>Responde estas preguntas para descubrir tu superpoder:</strong><ul>" + 
+          preguntas.map(p => `<li>${p}</li>`).join('') + "</ul>"; 
+        // Mostrar consejo IA 
+        document.getElementById('consejo-ia').innerHTML = 
+          `<strong>Consejo de la IA:</strong> ${consejo}`; 
+      }); 
+    </script> 
+  </body> 
+</html>

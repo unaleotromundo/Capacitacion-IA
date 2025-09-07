@@ -1,0 +1,12 @@
+
+Genera un certificado de finalización con el estilo visual exacto del certificado proporcionado (con fondos de acuarela en tonos azules, verdes y dorados, y la luciérnaga integrada en la esquina superior izquierda). El certificado debe tener los siguientes campos de texto, con sus respectivas ubicaciones y estilos de fuente:
+
+1.  **"CERTIFICADO DE FINALIZACIÓN"**: Ubicado en la parte superior central del certificado, en texto grande, oscuro y en mayúsculas, con una fuente sans-serif elegante.
+2.  **"Se otorga a"**: Ubicado justo debajo del título principal, en texto más pequeño, cursiva y con una fuente de estilo caligráfico.
+3.  **"NOMBRE DEL TITULAR"**: Ubicado en la parte central del certificado, en texto grande, negrita, mayúsculas y oscuro, con una fuente sans-serif elegante. Debe tener una línea horizontal decorativa debajo.
+4.  **"por completar exitosamente el curso"**: Ubicado justo debajo de la línea del nombre del titular, en texto más pequeño y oscuro, con una fuente sans-serif simple.
+5.  **"Educador Potenciado por IA"**: Ubicado debajo de la frase anterior, en texto mediano, negrita y oscuro, con una fuente sans-serif elegante. Este es el campo del nombre del curso y debe ser personalizable.
+6.  **"FIRMA DEL INSTRUCTOR"**: Ubicado en la parte inferior izquierda del certificado, en texto pequeño y oscuro, con una fuente sans-serif simple. Debe haber una línea horizontal decorativa encima para la firma.
+7.  **"Nombre del Instructor"**: Ubicado debajo de "FIRMA DEL INSTRUCTOR", en texto aún más pequeño, en un color más claro y con una fuente sans-serif simple. Este es el campo personalizable del nombre del instructor.
+8.  **"Fecha de Emisión"**: Ubicado en la parte inferior derecha del certificado, en texto pequeño y oscuro, con una fuente sans-serif simple. Debe haber una línea horizontal decorativa encima para la fecha.
+```

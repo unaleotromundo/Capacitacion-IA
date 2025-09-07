@@ -13,8 +13,7 @@ class StorageManager {
             certificateData: {
                 completed: false,
                 completionDate: null,
-                generatedConclusion: null,
-                confettiShown: false
+                generatedConclusion: null
             },
             studentName: '',
             lastAccess: new Date().toISOString()
@@ -260,7 +259,7 @@ const courseData = {
             activity: {
                 type: 'practical',
                 title: 'Conoce a tu Asistente',
-                description: 'Para tener una primera experiencia tangible y positiva, te invitamos a abrir IABee (el ícono de la abeja a la derecha) y probar con una pregunta sencilla. Esto te permitirá ver la magia en acción.',
+                description: 'Para tener una primera experiencia tangible y positiva,  te invitamos a abrir IABee (el ícono de la abeja abajo, a la derecha) o una de estas herramientas (como ChatGPT, Gemini o Claude) y probar con una pregunta sencilla. Esto te permitirá ver la magia en acción.',
                 prompt: '¿Puedes explicarme qué es la fotosíntesis como si yo tuviera 10 años y me encantara el fútbol?',
                 instruction: 'Observa cómo la IA no solo simplifica el concepto, sino que utiliza analogías relacionadas con el fútbol para hacerlo más cercano y comprensible. Esta es la esencia de tu nuevo asistente.',
                 responseField: 'Describe qué pasó cuando probaste este prompt y qué te pareció la respuesta de la IA:'
@@ -448,9 +447,12 @@ const courseData = {
                 <h3>Tu Turno:</h3>
                 <p>Copia este prompt, pégalo en tu herramienta de IA preferida y observa el resultado. Experimenta cambiando alguna de las partes. ¿Qué pasa si cambias el tono a «muy científico»? ¿O el rol a «un explorador de la selva»? ¡La experimentación es clave!</p>
                 <div class="highlight-box">
-                    <p><strong>Tabla de Referencia Rápida: La Fórmula R-C-T-F-E-T</strong><br>
-                    Para ayudarte a interiorizar esta estructura, aquí tienes una tabla de referencia. Puedes imprimirla y tenerla a mano mientras practicas. Esta herramienta visual sirve como un andamio práctico, reduciendo la carga cognitiva y acelerando tu confianza y fluidez al crear prompts.</p>
-                </div>
+    <p><strong>Tabla de Referencia Rápida: La Fórmula R-C-T-F-E-T</strong><br>
+    Para ayudarte a interiorizar esta estructura, aquí tienes una tabla de referencia. Puedes imprimirla y tenerla a mano mientras practicas. Esta herramienta visual sirve como un andamio práctico, reduciendo la carga cognitiva y acelerando tu confianza y fluidez al crear prompts.</p>
+    <a href="tabladereferencia.pdf" download class="btn btn-secondary btn-small" style="margin-top: 1rem; display: inline-flex; align-items: center; gap: 0.5rem;">
+        <i class="fas fa-download"></i> Descargar Tabla de Referencia (PDF)
+    </a>
+</div>
             `,
             hasActivity: true,
             activity: {
@@ -819,58 +821,64 @@ const courseData = {
             hasDiscussion: true,
             discussionPrompt: "Comparte una tarea que hayas rediseñado (o que planees rediseñar) para ser 'a prueba de IA'. ¿Qué habilidades de orden superior estás evaluando con esta nueva versión?"
         },
-        certificate: {
-            id: 'certificate',
-            title: '¡Felicidades! Has completado el curso',
-            subtitle: 'Resumen del Viaje y Certificado',
-            module: 'Certificado y Conclusión',
-            content: `
-                <div class="certificate-content">
-                    <h2><i class="fas fa-graduation-cap"></i> ¡Felicidades!</h2>
-                    <p>Has completado un viaje intensivo desde los fundamentos de la inteligencia artificial hasta las técnicas avanzadas de prompting. Ya no eres un espectador de esta tecnología, sino un participante activo y capacitado. A lo largo de este curso, has aprendido a desmitificar la IA, a conversar con ella de manera efectiva usando la fórmula R-C-T-F-E-T, a crear recursos educativos personalizados en minutos y, lo más importante, a navegar este nuevo territorio con una brújula ética y responsable.</p>
-                    <p>Ahora posees las habilidades para transformar tu práctica docente, liberar tiempo valioso y crear experiencias de aprendizaje más ricas y atractivas para tus estudiantes. Para reconocer tu dedicación y el dominio de estas nuevas competencias, te otorgamos un <strong><a href="#" onclick="Navigation.showCertificate(); return false;" style="color: #d4af37; text-decoration: underline;">Certificado Oficial de Finalización</a></strong>. ¡Muéstralo con orgullo!</p>
-                    <div style="text-align: center; margin: 2rem 0;">
-                        <a href="BibliotecaRapidaPromptsEducadores.pdf" download class="btn btn-primary" style="font-size: 1.1rem; padding: 1rem 2rem;">
-                            <i class="fas fa-download"></i> Biblioteca de Prompts
-                        </a>
-                        <p style="margin-top: 0.5rem; font-size: 0.9rem; color: var(--text-light);">
-                            (Archivo: BibliotecaRapidaPromptsEducadores.pdf)
-                        </p>
-                    </div>
-                    <h3>Glosario de Términos Clave (en Lenguaje Sencillo)</h3>
-                    <ul>
-                        <li><strong>Inteligencia Artificial (IA) Generativa:</strong> Un tipo de IA que puede crear contenido nuevo (texto, imágenes, etc.) en lugar de solo analizar datos existentes.</li>
-                        <li><strong>LLM (Large Language Model / Gran Modelo de Lenguaje):</strong> El «cerebro» detrás de herramientas como ChatGPT. Es un modelo entrenado con enormes cantidades de texto para entender y generar lenguaje humano.</li>
-                        <li><strong>Prompt:</strong> La instrucción, pregunta o texto que le das a la IA para que realice una tarea.</li>
-                        <li><strong>Alucinación:</strong> Un término para describir cuando una IA genera información que es incorrecta, inventada o que no tiene sentido, pero la presenta con total confianza. Siempre es crucial verificar la información importante.</li>
-                        <li><strong>Sesgo (Bias):</strong> Una tendencia en los resultados de la IA a favorecer ciertas perspectivas o a generar resultados injustos, debido a los sesgos presentes en los datos con los que fue entrenada.</li>
-                        <li><strong>Iteración:</strong> El proceso de refinar la respuesta de la IA a través de una conversación con múltiples prompts de seguimiento.</li>
-                        <li><strong>Chain-of-Thought (Cadena de Pensamiento):</strong> Una técnica de prompting que consiste en pedir a la IA que explique su razonamiento «paso a paso» para mejorar la precisión en tareas complejas.</li>
-                    </ul>
-                    <h3>Recursos Visuales y Herramientas Recomendadas</h3>
-                    <p>Para que tus materiales educativos no solo sean efectivos, sino también visualmente atractivos y «hermosos», te recomendamos explorar estos recursos. Muchos de ellos ofrecen íconos y gráficos gratuitos o bajo licencias Creative Commons, que te permiten usarlos legalmente en tus proyectos educativos, a menudo solo con dar crédito al autor.</p>
-                    <ul>
-                        <li><strong>Bancos de Íconos:</strong>
-                            <ul>
-                                <li><strong>Flaticon:</strong> Ofrece una enorme biblioteca de íconos en diversos estilos. La versión gratuita requiere atribución.</li>
-                                <li><strong>The Noun Project:</strong> Ideal para encontrar íconos simples y claros para casi cualquier concepto imaginable.</li>
-                                <li><strong>Icons8:</strong> Proporciona íconos consistentes en múltiples estilos, lo que es genial para mantener una identidad visual unificada.</li>
-                            </ul>
-                        </li>
-                        <li><strong>Bancos de Imágenes y Gráficos (con licencias amigables para la educación):</strong>
-                            <ul>
-                                <li><strong>Creative Commons Search (ahora Openverse):</strong> Un motor de búsqueda que te permite encontrar imágenes, audio y más contenido con licencias CC, listo para ser usado y remezclado.</li>
-                                <li><strong>Freepik:</strong> Ofrece una gran variedad de vectores, fotos y plantillas. Tiene opciones gratuitas con atribución.</li>
-                                <li><strong>Canva:</strong> Una herramienta de diseño muy intuitiva que incluye una vasta biblioteca de elementos gráficos, muchos de ellos gratuitos, perfecta para crear presentaciones, hojas de trabajo y más.</li>
-                            </ul>
-                        </li>
-                    </ul>
-                    <p>Recuerda siempre revisar los términos de la licencia de cualquier recurso visual que utilices para asegurarte de que cumples con los requisitos de atribución. ¡Ahora tienes todo lo que necesitas para empezar a crear!</p>
-                </div>
-            `,
-            hasDiscussion: true,
-            discussionPrompt: "¿Qué es lo primero que vas a implementar en tu aula con lo aprendido en este curso? ¿Qué impacto esperas que tenga?"
-        }
+certificate: {
+    id: 'certificate',
+    title: '¡Felicidades! Has completado el curso',
+    subtitle: 'Resumen del Viaje',
+    module: 'Conclusión',
+    content: `
+        <div class="certificate-content">
+            <h2><i class="fas fa-graduation-cap"></i> ¡Felicidades, Educador Inspirador!</h2>
+            <p>🎉 ¡Has llegado al final de tu viaje! Pero en realidad, esto es solo el <strong>comienzo</strong>. Has pasado de ser un curioso a convertirte en un <strong>maestro del prompting</strong>, un arquitecto de experiencias de aprendizaje y un guardián ético de la tecnología en el aula.</p>
+            
+            <div class="highlight-box">
+                <h3>🌟 Tu Kit de Superpoderes Docente</h3>
+                <p>Ahora llevas contigo:</p>
+                <ul>
+                    <li><strong>La Fórmula R-C-T-F-E-T:</strong> Tu varita mágica para comunicarte con la IA.</li>
+                    <li><strong>Plantillas listas para usar:</strong> Tu fábrica de recursos educativos.</li>
+                    <li><strong>El arte de la iteración:</strong> Tu habilidad para pulir cualquier idea hasta la perfección.</li>
+                    <li><strong>Una brújula ética:</strong> Tu guía para navegar con responsabilidad.</li>
+                </ul>
+            </div>
+
+            <h3><i class="fas fa-rocket"></i> ¿Qué sigue ahora?</h3>
+            <p>No guardes lo aprendido en un cajón. ¡Llévalo a tu aula y transforma la experiencia de tus estudiantes!</p>
+            
+            <div class="practical-activity">
+                <h4>🚀 Tu Plan de Acción en 3 Pasos</h4>
+                <ol>
+                    <li><strong>Elige UNA cosa:</strong> Selecciona una sola plantilla o técnica que usarás en la próxima semana. No intentes hacerlo todo a la vez.</li>
+                    <li><strong>Adáptala:</strong> Personalízala para tu contexto, tu materia y tus estudiantes.</li>
+                    <li><strong>¡Hazlo y celebra!: </strong> Implementa, observa los resultados y reconoce tu valentía por innovar.</li>
+                </ol>
+            </div>
+
+            <div style="text-align: center; margin: 2rem 0;">
+                <a href="BibliotecaRapidaPromptsEducadores.pdf" download class="btn btn-primary" style="font-size: 1.1rem; padding: 1rem 2rem; margin: 0.5rem;">
+                    <i class="fas fa-download"></i> Descargar Biblioteca de Prompts
+                </a>
+                <a href="tabladereferencia.pdf" download class="btn btn-secondary" style="font-size: 1.1rem; padding: 1rem 2rem; margin: 0.5rem;">
+                    <i class="fas fa-table"></i> Descargar Tabla de Referencia RCTFE-T
+                </a>
+                <p style="margin-top: 0.5rem; font-size: 0.9rem; color: var(--text-light);">
+                    Tus herramientas esenciales para llevar al aula.
+                </p>
+            </div>
+
+            <div class="golden-rule">
+                <p><i class="fas fa-heart"></i> Recuerda: La IA no reemplaza tu magia docente, la potencia. Eres tú quien pone el corazón, la creatividad y el propósito en cada lección. ¡Eso es algo que ninguna máquina puede replicar!</p>
+            </div>
+
+            <h3><i class="fas fa-hands-helping"></i> ¡Sigue Conectado!</h3>
+            <p>Este no es un adiós, sino un “hasta pronto”. Comparte tus éxitos, tus desafíos y tus creaciones con la comunidad. Tu experiencia puede inspirar a cientos de colegas.</p>
+            <p>¡Gracias por confiar en este curso! Ha sido un honor acompañarte en este viaje.</p>
+            <p><strong>Con cariño,</strong><br>El equipo de “Tu Viaje - Educador Potenciado por IA”</p>
+        </div>
+    `,
+    hasDiscussion: true,
+    discussionPrompt: "¿Cuál es la PRIMERA cosa que vas a implementar en tu aula? ¡Compártela con la comunidad! Tu experiencia puede inspirar a otros."
+}
     }
 };
 
@@ -963,35 +971,42 @@ class LessonRenderer {
         this.addEventListeners(lessonId);
     }
     static addEventListeners(lessonId) {
-        // Submit comment
-        const submitCommentBtn = document.querySelector(`.submit-comment[data-lesson="${lessonId}"]`);
-        if (submitCommentBtn) {
-            submitCommentBtn.addEventListener('click', function() {
-                const textarea = document.getElementById(`comment-${lessonId}`);
-                const comment = textarea.value.trim();
-                if (comment) {
-                    storageManager.saveComment(lessonId, comment);
-                    alert('¡Comentario guardado!');
-                    // Marcar lección como completada
-                    storageManager.completeLesson(lessonId);
-                    // Actualizar navegación y progreso
-                    Navigation.updateNavigation();
-                    Navigation.updateProgress();
-                    // Habilitar botón "Siguiente" si existe
-                    const nextLessonId = storageManager.getNextLesson(lessonId);
-                    if (nextLessonId) {
-                        const nextBtn = document.querySelector('.next-lesson');
-                        if (nextBtn) {
-                            nextBtn.disabled = false;
-                            nextBtn.classList.remove('disabled');
-                        }
-                    }
-                } else {
-                    alert('Por favor, escribe un comentario antes de publicar.');
+// Submit comment
+const submitCommentBtn = document.querySelector(`.submit-comment[data-lesson="${lessonId}"]`);
+if (submitCommentBtn) {
+    submitCommentBtn.addEventListener('click', function() {
+        const textarea = document.getElementById(`comment-${lessonId}`);
+        const comment = textarea.value.trim();
+        if (comment) {
+            storageManager.saveComment(lessonId, comment);
+            alert('¡Comentario guardado!');
+
+            // Marcar lección como completada
+            storageManager.completeLesson(lessonId);
+
+            // Si es la lección final (certificate), descargar el JSON
+            if (lessonId === 'certificate') {
+                downloadUserResponsesAsJSON();
+            }
+
+            // Actualizar navegación y progreso
+            Navigation.updateNavigation();
+            Navigation.updateProgress();
+
+            // Habilitar botón "Siguiente" si existe (aunque en certificate no hay siguiente)
+            const nextLessonId = storageManager.getNextLesson(lessonId);
+            if (nextLessonId) {
+                const nextBtn = document.querySelector('.next-lesson');
+                if (nextBtn) {
+                    nextBtn.disabled = false;
+                    nextBtn.classList.remove('disabled');
                 }
-            });
+            }
+        } else {
+            alert('Por favor, escribe un comentario antes de publicar.');
         }
-        // Submit activity
+    });
+}        // Submit activity
         const submitActivityBtn = document.querySelector(`.submit-activity[data-lesson="${lessonId}"]`);
         if (submitActivityBtn) {
             submitActivityBtn.addEventListener('click', function() {
@@ -1132,8 +1147,6 @@ class Navigation {
                 const studentName = data?.studentName || "Educador/a";
                 const completionDate = data?.certificateData?.completionDate ? new Date(data.certificateData.completionDate) : new Date();
                 const certId = Math.floor(10000 + Math.random() * 90000);
-                // 🎉 Disparar confetis al descargar
-                showConfetti();
                 generatePDF(studentName, completionDate, certId);
             });
         }
@@ -1216,13 +1229,6 @@ class Navigation {
         document.getElementById('issueDate').textContent = completionDate.toLocaleDateString('es-ES');
         // Mostrar certificado visual
         certificatePreview.style.display = 'block';
-        // 🎉 Disparar confeti CADA VEZ que se abre el certificado
-        showConfetti();
-        // (Opcional) Si quieres mantener la bandera "confettiShown" para estadísticas, puedes dejarla:
-        if (!data.certificateData.confettiShown) {
-            data.certificateData.confettiShown = true;
-            storageManager.saveData(data);
-        }
         // Generar conclusión personalizada
         setTimeout(() => {
             const allComments = storageManager.getAllCommentsText();
@@ -1249,8 +1255,6 @@ class Navigation {
         }, 1500);
         // Botón de descarga
         downloadBtn.onclick = function() {
-            // 🎉 Disparar confetis al descargar
-            showConfetti();
             generatePDF(studentName, completionDate, certId);
         };
         // Botón de cerrar
@@ -1314,39 +1318,65 @@ function generatePDF(name, date, certId) {
     // Descargar
     const filename = `Felicidades_${name.replace(/\s+/g, '_')}.pdf`;
     doc.save(filename);
-    alert(`🎉 ¡Certificado descargado!\nArchivo: ${filename}`);
+    alert(`🎉 ¡Certificado descargado!
+Archivo: ${filename}`);
 }
+// 📥 Descargar todas las respuestas del usuario como JSON
+function downloadUserResponsesAsJSON() {
+    const data = storageManager.getData();
+    if (!data) return;
 
-// 🎉 Función reutilizable para mostrar confetis por encima de TODO
-function showConfetti() {
-    // Creamos un contenedor temporal para los confetis
-    const confettiContainer = document.createElement('div');
-    confettiContainer.style.position = 'fixed';
-    confettiContainer.style.top = '0';
-    confettiContainer.style.left = '0';
-    confettiContainer.style.width = '100%';
-    confettiContainer.style.height = '100%';
-    confettiContainer.style.pointerEvents = 'none'; // Para que no bloquee clicks
-    confettiContainer.style.zIndex = '99999'; // ¡Por encima de TODO!
-    document.body.appendChild(confettiContainer);
+    // Recolectar todos los comentarios y actividades
+    const userResponses = {};
+    const allLessons = [
+        'intro',
+        '1.1', '1.2', '1.3',
+        '2.1', '2.2', '2.3',
+        '3.1', '3.2', '3.3', '3.4',
+        '4.1', '4.2', '4.3',
+        '5.1', '5.2', '5.3',
+        'certificate'
+    ];
 
-    // Efecto confeti DENTRO del contenedor con z-index alto
-    confetti({
-        particleCount: 200,
-        spread: 180,
-        origin: { y: 0.6 },
-        colors: ['#ffcc00', '#003366', '#ffffff', '#d4af37'],
-        container: confettiContainer // <-- ¡ESTO es lo clave!
+    allLessons.forEach(lessonId => {
+        const lesson = courseData.lessons[lessonId];
+        if (!lesson) return;
+
+        userResponses[lessonId] = {
+            title: lesson.title,
+            subtitle: lesson.subtitle,
+            responses: {}
+        };
+
+        // Agregar comentario si existe
+        if (data.userComments && data.userComments[lessonId]) {
+            userResponses[lessonId].responses.comment = data.userComments[lessonId].text;
+        }
+
+        // Agregar actividad si existe
+        if (data.userActivities && data.userActivities[lessonId]) {
+            userResponses[lessonId].responses.activity = data.userActivities[lessonId].response;
+        }
     });
 
-    // Limpiamos el contenedor después de 5 segundos
-    setTimeout(() => {
-        if (confettiContainer && confettiContainer.parentNode) {
-            document.body.removeChild(confettiContainer);
-        }
-    }, 5000);
-}
+    // Convertir a JSON con formato legible
+    const jsonString = JSON.stringify(userResponses, null, 2);
+    const blob = new Blob([jsonString], { type: 'application/json' });
+    const url = URL.createObjectURL(blob);
 
+    // Crear enlace de descarga
+    const a = document.createElement('a');
+    a.href = url;
+    a.download = `Mis_Respuestas_Curso_IA_${new Date().toISOString().split('T')[0]}.json`;
+    document.body.appendChild(a);
+    a.click();
+
+    // Limpiar
+    URL.revokeObjectURL(url);
+    document.body.removeChild(a);
+
+    alert('📄 ¡Tus respuestas se han descargado como archivo JSON!');
+}
 // ========== APP INITIALIZATION ==========
 // Create global storage manager
 const storageManager = new StorageManager();
